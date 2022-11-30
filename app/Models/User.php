@@ -33,4 +33,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->email == config('auth.filament.user.email') && $this->hasVerifiedEmail();
     }
+
+    public function emailIsDirty(string $newEmail): bool
+    {
+        return $newEmail != $this->email;
+    }
 }

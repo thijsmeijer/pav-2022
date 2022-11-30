@@ -1,24 +1,3 @@
-<script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
-
-const props = defineProps({
-    mustVerifyEmail: Boolean,
-    status: String,
-});
-
-const user = usePage().props.value.auth.user;
-
-const form = useForm({
-    name: user.name,
-    email: user.email,
-});
-</script>
-
 <template>
     <section>
         <header>
@@ -38,9 +17,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
@@ -54,32 +30,29 @@ const form = useForm({
                     type="email"
                     class="mt-1 block w-full"
                     v-model="form.email"
-                    required
-                    autocomplete="email"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div v-if="props.mustVerifyEmail && user.email_verified_at === null">
+            <div v-if="!form.email_verified_at">
                 <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                     Your email address is unverified.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    <button
+                        type="button"
+                        class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        @click="sendVerificationEmail"
                     >
                         Click here to re-send the verification email.
-                    </Link>
+                    </button>
                 </p>
 
-                <div
-                    v-show="props.status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
-                >
-                    A new verification link has been sent to your email address.
-                </div>
+<!--                <div-->
+<!--                    v-show="props.status === 'verification-link-sent'"-->
+<!--                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"-->
+<!--                >-->
+<!--                    A new verification link has been sent to your email address.-->
+<!--                </div>-->
             </div>
 
             <div class="flex items-center gap-4">
@@ -92,3 +65,45 @@ const form = useForm({
         </form>
     </section>
 </template>
+
+<script>
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
+import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+
+export default {
+    components: {
+        InputError,
+        InputLabel,
+        PrimaryButton,
+        TextInput,
+        Link,
+    },
+    props: {
+        user: {
+            type: Object,
+            required: true,
+        },
+    },
+    setup(props) {
+        const form = useForm({
+            name: props.user.data.name,
+            email: props.user.data.email,
+            email_verified_at: props.user.data.email_verified_at,
+        });
+
+        return {
+            form,
+        };
+    },
+    methods: {
+        sendVerificationEmail() {
+            Inertia.post(route('email.verification.send'));
+        },
+    },
+};
+</script>
