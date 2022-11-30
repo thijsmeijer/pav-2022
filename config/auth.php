@@ -108,4 +108,8 @@ return [
 
     'password_timeout' => 10800,
 
+    'filament' => [
+        'user' => env('FILAMENT_ADMIN_LOGIN'),
+    ],
+
 ];
