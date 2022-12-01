@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'pav',
+            'username' => 'pav',
             'email' => config('auth.filament.user.email'),
             'password' => bcrypt(config('auth.filament.user.password')),
         ]);
