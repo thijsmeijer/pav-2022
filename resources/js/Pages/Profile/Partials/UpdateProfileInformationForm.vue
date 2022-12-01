@@ -10,16 +10,16 @@
 
         <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="username" value="Username" />
 
                 <TextInput
-                    id="name"
+                    id="username"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="form.username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div>
@@ -46,17 +46,23 @@
                         Click here to re-send the verification email.
                     </button>
                 </p>
-
-<!--                <div-->
-<!--                    v-show="props.status === 'verification-link-sent'"-->
-<!--                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"-->
-<!--                >-->
-<!--                    A new verification link has been sent to your email address.-->
-<!--                </div>-->
+                <div
+                    v-show="status === 'verification-link-sent'"
+                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
+                >
+                    A new verification link has been sent to your email address.
+                </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <button
+                    type="submit"
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                    @click="saveProfileInformation"
+                    :disabled="form.processing"
+                >
+                    Save
+                </button>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
@@ -89,9 +95,14 @@ export default {
             required: true,
         },
     },
+    data () {
+        return {
+            status: null,
+        };
+    },
     setup(props) {
         const form = useForm({
-            name: props.user.data.name,
+            username: props.user.data.username,
             email: props.user.data.email,
             email_verified_at: props.user.data.email_verified_at,
         });
@@ -103,6 +114,13 @@ export default {
     methods: {
         sendVerificationEmail() {
             Inertia.post(route('email.verification.send'));
+            this.status = 'verification-link-sent';
+        },
+        saveProfileInformation() {
+            this.form.patch(route('profile.update'), {
+                preserveScroll: true,
+                preserveState: false,
+            });
         },
     },
 };
