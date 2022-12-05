@@ -12,6 +12,7 @@
                     <UpdateProfileInformationForm
                         class="max-w-xl"
                         :user="user"
+                        :errors="$attrs.errors"
                     />
                 </div>
 

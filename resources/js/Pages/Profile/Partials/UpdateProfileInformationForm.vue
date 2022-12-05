@@ -17,9 +17,10 @@
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.username"
+                    @change="delete errors.username && form.validate('username')"
                 />
 
-                <InputError class="mt-2" :message="form.errors.username" />
+                <InputError class="mt-2" :message="errors.username || form.errors.username" />
             </div>
 
             <div>
@@ -30,9 +31,10 @@
                     type="email"
                     class="mt-1 block w-full"
                     v-model="form.email"
+                    @change="delete errors.email && form.validate('email')"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="errors.email || form.errors.email" />
             </div>
 
             <div v-if="!form.email_verified_at">
@@ -80,6 +82,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
+import { usePrecognitiveForm } from 'laravel-precognition-vue';
 
 export default {
     components: {
@@ -94,6 +97,10 @@ export default {
             type: Object,
             required: true,
         },
+        errors: {
+            type: Object,
+            required: false,
+        },
     },
     data () {
         return {
@@ -101,14 +108,14 @@ export default {
         };
     },
     setup(props) {
-        const form = useForm({
+        const form = usePrecognitiveForm('patch', route('profile.update'), useForm({
             username: props.user.data.username,
             email: props.user.data.email,
             email_verified_at: props.user.data.email_verified_at,
-        });
+        }));
 
         return {
-            form,
+            form
         };
     },
     methods: {
@@ -117,11 +124,11 @@ export default {
             this.status = 'verification-link-sent';
         },
         saveProfileInformation() {
-            this.form.patch(route('profile.update'), {
+            this.form.submit({
                 preserveScroll: true,
                 preserveState: false,
             });
-        },
+        }
     },
 };
 </script>
