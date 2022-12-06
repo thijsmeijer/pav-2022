@@ -30,11 +30,4 @@ class Welcome extends Notification
                     ->action('View your profile', route('profile.edit'))
                     ->line('Thank you for using our application!');
     }
-
-    public function toArray($notifiable): array
-    {
-        return [
-            //
-        ];
-    }
 }

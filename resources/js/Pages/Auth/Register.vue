@@ -5,14 +5,14 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { usePrecognitiveForm} from "laravel-precognition-vue";
 
-const form = useForm({
-    name: '',
+const form = usePrecognitiveForm('post', route('register'), useForm({
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
-    terms: false,
-});
+}));
 
 const submit = () => {
     form.post(route('register'), {
@@ -27,19 +27,17 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="username" value="Username" />
 
                 <TextInput
-                    id="name"
+                    id="username"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
+                    v-model="form.username"
+                    @change="form.validate('username')"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div class="mt-4">
@@ -50,8 +48,7 @@ const submit = () => {
                     type="email"
                     class="mt-1 block w-full"
                     v-model="form.email"
-                    required
-                    autocomplete="username"
+                    @change="form.validate('email')"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -65,8 +62,7 @@ const submit = () => {
                     type="password"
                     class="mt-1 block w-full"
                     v-model="form.password"
-                    required
-                    autocomplete="new-password"
+                    @change="form.validate('password')"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -80,8 +76,6 @@ const submit = () => {
                     type="password"
                     class="mt-1 block w-full"
                     v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
