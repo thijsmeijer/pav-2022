@@ -7,6 +7,7 @@ use App\Listeners\SendWelcomeNotification;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,8 @@ class EventServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        JsonResource::withoutWrapping();
+
         User::observe(UserObserver::class);
     }
 
