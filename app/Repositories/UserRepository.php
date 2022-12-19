@@ -13,9 +13,17 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function createUser($userData)
+    public function createUser($userData): User
     {
-        return User::create($userData);
+        $user = User::create([
+            'username' => $userData['username'],
+            'email' => $userData['email'],
+            'password' => bcrypt($userData['password']),
+        ]);
+
+        $user->profile()->create($userData);
+
+        return $user;
     }
 
     public function updateUser(User $user, array $newUserData): bool
