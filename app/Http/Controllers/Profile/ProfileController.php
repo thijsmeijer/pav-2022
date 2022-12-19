@@ -37,12 +37,12 @@ class ProfileController extends Controller
 
     public function destroy(ProfileDestroyRequest $request): RedirectResponse
     {
-        Auth::logout();
-
         $request->user()->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        Auth::logout();
 
         return Redirect::to('/');
     }
