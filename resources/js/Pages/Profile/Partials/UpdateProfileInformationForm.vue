@@ -1,58 +1,123 @@
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+        <div class="space-y-8">
+            <div class="space-y-8">
+                <div>
+                    <div>
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+                        <p class="mt-1 text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                    </div>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile information and email address.
-            </p>
-        </header>
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-6">
+                        <div class="sm:col-span-6">
+                            <label for="photo" class="block text-sm font-medium text-gray-700">Avatar</label>
+                            <div class="mt-1 flex items-center">
+                              <span class="h-12 w-12 overflow-hidden rounded-full bg-gray-100">
+                                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                              </span>
+                                <button type="button" class="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Change</button>
+                            </div>
+                        </div>
+                    </div>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="username" value="Username" />
+                    <div>
+                        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-3">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <div>
+                                    <TextInput
+                                        id="name"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        v-model="form.name"
+                                        @input="delete errors.name && form.validate('name')"
+                                    />
+                                </div>
+                                <InputError class="mt-2" :message="errors.name || form.errors.name" />
+                            </div>
 
-                <TextInput
-                    id="username"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.username"
-                    @change="delete errors.username && form.validate('username')"
-                />
+                            <div class="sm:col-span-4">
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <div>
+                                    <TextInput
+                                        id="email"
+                                        type="email"
+                                        class="mt-1 block w-full"
+                                        v-model="form.email"
+                                        @input="delete errors.email && form.validate('email')"
+                                    />
+                                </div>
+                                <InputError class="mt-2" :message="errors.email || form.errors.email" />
+                            </div>
+                        </div>
+                        <div v-if="!user.email_verified_at">
+                            <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                                Your email address is unverified.
+                                <button
+                                    type="button"
+                                    class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                    @click.prevent="sendVerificationEmail"
+                                >
+                                    Click here to send the verification email.
+                                </button>
+                            </p>
+                            <div
+                                v-show="status === 'verification-link-sent'"
+                                class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
+                            >
+                                A new verification link has been sent to your email address.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
-                <InputError class="mt-2" :message="errors.username || form.errors.username" />
-            </div>
+                        <div class="sm:col-span-4">
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of birth</label>
+                            <div>
+                                <TextInput
+                                    id="dob"
+                                    type="date"
+                                    class="mt-1 block w-full"
+                                    v-model="form.date_of_birth"
+                                    @input="delete errors.date_of_birth && form.validate('date_of_birth')"
+                                />
+                            </div>
+                            <InputError class="mt-2" :message="errors.date_of_birth || form.errors.date_of_birth" />
+                        </div>
 
-            <div>
-                <InputLabel for="email" value="Email" />
+                        <div class="sm:col-span-4">
+                            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">pav.com/</span>
+                                <input
+                                    id="username"
+                                    type="text"
+                                    class="w-full block w-full rounded-r-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    v-model="form.username"
+                                    @input="delete errors.username && form.validate('username')"
+                                />
+                            </div>
+                            <InputError class="mt-2" :message="errors.username || form.errors.username" />
+                        </div>
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    @change="delete errors.email && form.validate('email')"
-                />
-
-                <InputError class="mt-2" :message="errors.email || form.errors.email" />
-            </div>
-
-            <div v-if="!form.email_verified_at">
-                <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                    Your email address is unverified.
-                    <button
-                        type="button"
-                        class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
-                        @click="sendVerificationEmail"
-                    >
-                        Click here to re-send the verification email.
-                    </button>
-                </p>
-                <div
-                    v-show="status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
-                >
-                    A new verification link has been sent to your email address.
+                        <div class="sm:col-span-6">
+                            <label for="about" class="block text-sm font-medium text-gray-700">About</label>
+                            <div class="mt-1">
+                                <textarea
+                                    id="about"
+                                    name="about"
+                                    rows="10"
+                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    v-model="form.bio"
+                                    @input="delete errors.bio && form.validate('bio')"
+                                />
+                            </div>
+                            <InputError class="mt-2" :message="errors.bio || form.errors.bio" />
+                            <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -60,8 +125,9 @@
                 <button
                     type="submit"
                     class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
-                    @click="saveProfileInformation"
+                    @click.prevent="saveProfileInformation"
                     :disabled="form.processing"
+                    :class="{'opacity-50 cursor-not-allowed': form.processing}"
                 >
                     Save
                 </button>
@@ -70,7 +136,7 @@
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
                 </Transition>
             </div>
-        </form>
+        </div>
     </section>
 </template>
 
@@ -79,8 +145,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
+import { Link, useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 import { usePrecognitiveForm } from 'laravel-precognition-vue';
 
@@ -109,9 +174,12 @@ export default {
     },
     setup(props) {
         const form = usePrecognitiveForm('patch', route('profile.update'), useForm({
-            username: props.user.data.username,
-            email: props.user.data.email,
-            email_verified_at: props.user.data.email_verified_at,
+            username: props.user.username,
+            email: props.user.email,
+            name: props.user.profile.name,
+            bio: props.user.profile.bio,
+            date_of_birth: props.user.profile.date_of_birth,
+            phone: props.user.profile.phone,
         }));
 
         return {
@@ -120,15 +188,18 @@ export default {
     },
     methods: {
         sendVerificationEmail() {
-            Inertia.post(route('email.verification.send'));
-            this.status = 'verification-link-sent';
+            Inertia.post(route('email.verification.send'), {}, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    this.status = 'verification-link-sent';
+                },
+            });
         },
         saveProfileInformation() {
-            this.form.submit({
+            this.form.patch(route('profile.update'), {
                 preserveScroll: true,
-                preserveState: false,
             });
-        }
+        },
     },
 };
 </script>
