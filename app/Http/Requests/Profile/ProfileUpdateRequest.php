@@ -13,7 +13,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'username' => [
                 ...$this->isPrecognitive()
-                ? [Rule::unique('users')->ignore($this->user()->id)]
+                ? [Rule::unique('users')->ignore($this->user()->id), 'alpha_dash']
                 : [
                     'required',
                     'string',
@@ -24,7 +24,10 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'email' => [
                 ...$this->isPrecognitive()
-                ? [Rule::unique(User::class)->ignore($this->user()->id), 'regex:/[a-z\.]+@([a-z0-9\-]+|\.{1})+\.[a-z0-9]+/']
+                ? [
+                    Rule::unique(User::class)->ignore($this->user()->id),
+                    'regex:/[a-z\.]+@([a-z0-9\-]+|\.{1})+\.[a-z0-9]+/',
+                ]
                 : [
                     'required',
                     'regex:/[a-z\.]+@([a-z0-9\-]+|\.{1})+\.[a-z0-9]+/',
