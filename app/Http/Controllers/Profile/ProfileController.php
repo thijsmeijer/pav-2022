@@ -34,7 +34,7 @@ class ProfileController extends Controller
     {
         $this->userRepository->update($request->user(), $request->validated());
 
-        return back();
+        return Redirect::route('profile.edit');
     }
 
     public function destroy(ProfileDestroyRequest $request): RedirectResponse

@@ -13,7 +13,7 @@
                                 <img class="w-10 h-10 rounded-full bg-gray-200 border-2" :src="avatarPreview || avatar" alt="profile_image">
                             </div>
                         </div>
-                        <div class="flex items-center relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                        <div class="flex items-center relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none hover:text-indigo-500">
                             <input type="file" @change="uploadAvatarPreview($event.target.files[0])"/>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                     class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
                                     @click.prevent="sendVerificationEmail"
                                 >
-                                    Click here to send the verification email.
+                                    Click here to re-send the verification email.
                                 </button>
                             </p>
                             <div

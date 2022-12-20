@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Events\User\Created as UserCreated;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class UserObserver
 {
@@ -17,8 +18,11 @@ class UserObserver
     public function updated(User $user): void
     {
         if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-            $user->save();
+            $user->sendEmailVerificationNotification();
+
+            $user->update([
+                'email_verified_at' => null,
+            ]);
         }
     }
 }

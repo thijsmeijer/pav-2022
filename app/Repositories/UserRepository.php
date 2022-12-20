@@ -24,7 +24,10 @@ class UserRepository implements UserRepositoryInterface
 
     public function update(User $user, array $newUserData): void
     {
-        $user->update($newUserData);
+        $user->update([
+            'username' => $newUserData['username'],
+            'email' => $newUserData['email'],
+        ]);
 
         $this->profileRepository->update($user->profile, $newUserData['profile']);
     }
