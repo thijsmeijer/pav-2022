@@ -7,16 +7,17 @@
                         <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
                         <p class="mt-1 text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
                     </div>
-
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-6">
-                        <div class="sm:col-span-6">
-                            <label for="photo" class="block text-sm font-medium text-gray-700">Avatar</label>
-                            <div class="mt-1 flex items-center">
+                    <div class="flex items-center">
+                        <div class="mt-6 w-10 h-10 rounded-full mr-4 mb-4">
+                            <div>
                                 <img class="w-10 h-10 rounded-full bg-gray-200 border-2" :src="avatarPreview || avatar" alt="profile_image">
-                                <input type="file" name="photo" id="photo" @change="uploadAvatar($event.target.files[0]) ">
                             </div>
                         </div>
+                        <div class="flex items-center relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                            <input type="file" @change="uploadAvatarPreview($event.target.files[0])"/>
+                        </div>
                     </div>
+
                     <div class="flex items-center gap-4">
                         <button
                             type="submit"
@@ -220,7 +221,7 @@ export default {
                 preserveScroll: true,
             });
         },
-        uploadAvatar(file) {
+        uploadAvatarPreview(file) {
             this.avatarForm.avatar = file;
         },
         updateAvatar() {
