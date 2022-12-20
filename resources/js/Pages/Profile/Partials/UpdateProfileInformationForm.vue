@@ -202,12 +202,6 @@ export default {
             avatar: null,
         });
 
-        const avatarPreview = computed((avatarForm) => {
-            if (avatarForm.avatar) {
-                return URL.createObjectURL(form.avatar);
-            }
-        });
-
         return {
             form, avatarForm
         };
