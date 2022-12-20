@@ -32,6 +32,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function () {
     Route::singleton('profile', ProfileController::class);
+    Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
     Route::delete('/profile-delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

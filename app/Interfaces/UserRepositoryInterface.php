@@ -13,4 +13,6 @@ interface UserRepositoryInterface
     public function updateUser(User $user, array $newUserData);
 
     public function deleteUser(User $user);
+
+    public function updateAvatar(User $user, $file);
 }

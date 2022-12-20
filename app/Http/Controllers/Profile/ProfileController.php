@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileDestroyRequest;
 use App\Http\Requests\Profile\ProfileUpdateRequest;
+use App\Http\Requests\Profile\UpdateAvatarRequest;
 use App\Http\Resources\Profile\UserResource;
 use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
@@ -31,6 +32,15 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $this->userRepository->updateUser($request->user(), $request->validated());
+
+        return Redirect::route('profile.edit');
+    }
+
+    public function updateAvatar(UpdateAvatarRequest $request): RedirectResponse
+    {
+        if ($request->hasFile('avatar')) {
+            $this->userRepository->updateAvatar($request->user(), $request->file('avatar'));
+        }
 
         return Redirect::route('profile.edit');
     }

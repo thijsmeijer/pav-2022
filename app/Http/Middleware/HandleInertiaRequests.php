@@ -17,6 +17,9 @@ class HandleInertiaRequests extends Middleware
             'auth.user' => fn () => $request->user()
                 ? new UserResource($request->user())
                 : null,
+            'avatar' => fn () => $request->user()
+                ? $request->user()->profile->getMedia('avatars')->first()->getUrl()
+                : null,
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

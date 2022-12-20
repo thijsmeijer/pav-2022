@@ -12,6 +12,7 @@
                     <UpdateProfileInformationForm
                         :user="user"
                         :errors="errors"
+                        :avatar="avatar"
                     />
                 </div>
 
@@ -49,6 +50,10 @@ export default {
         },
         errors: {
             type: Object,
+            required: false,
+        },
+        avatar: {
+            type: String,
             required: false,
         },
     }

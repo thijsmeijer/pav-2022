@@ -15,15 +15,11 @@ class UserRepository implements UserRepositoryInterface
 
     public function createUser($userData): User
     {
-        $user = User::create([
+        return User::create([
             'username' => $userData['username'],
             'email' => $userData['email'],
             'password' => bcrypt($userData['password']),
         ]);
-
-        $user->profile()->create($userData);
-
-        return $user;
     }
 
     public function updateUser(User $user, array $newUserData): bool
@@ -38,5 +34,11 @@ class UserRepository implements UserRepositoryInterface
     public function deleteUser(User $user): ?bool
     {
         return $user->delete();
+    }
+
+    public function updateAvatar(User $user, $file)
+    {
+        $user->profile->getMedia('avatars')->each->delete();
+        $user->profile->addMedia($file)->toMediaCollection('avatars', 'media.avatars');
     }
 }

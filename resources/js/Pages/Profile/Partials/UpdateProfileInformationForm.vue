@@ -12,14 +12,25 @@
                         <div class="sm:col-span-6">
                             <label for="photo" class="block text-sm font-medium text-gray-700">Avatar</label>
                             <div class="mt-1 flex items-center">
-                              <span class="h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                              </span>
-                                <button type="button" class="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Change</button>
+                                <img class="w-10 h-10 rounded-full bg-gray-200 border-2" :src="avatarPreview || avatar" alt="profile_image">
+                                <input type="file" name="photo" id="photo" @change="uploadAvatar($event.target.files[0]) ">
                             </div>
                         </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="submit"
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                            @click.prevent="updateAvatar"
+                            :disabled="avatarForm.processing"
+                            :class="{'opacity-50 cursor-not-allowed': avatarForm.processing}"
+                        >
+                            Save avatar
+                        </button>
+
+                        <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
+                            <p v-if="avatarForm.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        </Transition>
                     </div>
 
                     <div>
@@ -148,6 +159,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 import { usePrecognitiveForm } from 'laravel-precognition-vue';
+import {computed} from "vue";
 
 export default {
     components: {
@@ -166,10 +178,14 @@ export default {
             type: Object,
             required: false,
         },
+        avatar: {
+            type: String,
+        }
     },
     data () {
         return {
             status: null,
+            avatarPreview: null,
         };
     },
     setup(props) {
@@ -182,8 +198,18 @@ export default {
             phone: props.user.profile.phone,
         }));
 
+        const avatarForm = useForm({
+            avatar: null,
+        });
+
+        const avatarPreview = computed((avatarForm) => {
+            if (avatarForm.avatar) {
+                return URL.createObjectURL(form.avatar);
+            }
+        });
+
         return {
-            form
+            form, avatarForm
         };
     },
     methods: {
@@ -199,6 +225,25 @@ export default {
             this.form.patch(route('profile.update'), {
                 preserveScroll: true,
             });
+        },
+        uploadAvatar(file) {
+            this.avatarForm.avatar = file;
+        },
+        updateAvatar() {
+            this.avatarForm.post(route('profile.avatar'), {
+                preserveScroll: true,
+                preserveState: false,
+                onSuccess: () => {
+                    this.form.avatar = null;
+                },
+            });
+        },
+    },
+    watch: {
+        'avatarForm.avatar': function (file) {
+            if (file) {
+                this.avatarPreview = URL.createObjectURL(file);
+            }
         },
     },
 };

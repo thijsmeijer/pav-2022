@@ -44,7 +44,6 @@ class ProfileUpdateRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:255',
-                'regex:/^(\+?)([0-9]{2,3})?([0-9]{9})$/',
             ],
             'date_of_birth' => [
                 'nullable',

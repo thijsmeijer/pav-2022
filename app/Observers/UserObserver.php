@@ -10,6 +10,8 @@ class UserObserver
     public function created(User $user): void
     {
         event(new UserCreated($user));
+
+        $user->profile()->create();
     }
 
     public function updated(User $user)
