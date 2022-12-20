@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Events\User\Created as UserCreated;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
 
 class UserObserver
 {
@@ -19,10 +18,6 @@ class UserObserver
     {
         if ($user->isDirty('email')) {
             $user->sendEmailVerificationNotification();
-
-            $user->update([
-                'email_verified_at' => null,
-            ]);
         }
     }
 }

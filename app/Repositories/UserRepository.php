@@ -24,6 +24,12 @@ class UserRepository implements UserRepositoryInterface
 
     public function update(User $user, array $newUserData): void
     {
+        if($user->email !== $newUserData['email']) {
+            $user->update([
+                'email_verified_at' => null,
+            ]);
+        }
+
         $user->update([
             'username' => $newUserData['username'],
             'email' => $newUserData['email'],
