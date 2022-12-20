@@ -35,20 +35,27 @@ class ProfileUpdateRequest extends FormRequest
                     'max:255',
                 ],
             ],
-            'bio' => [
-                'nullable',
-                'string',
-                'max:1048',
-            ],
-            'phone' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-            'date_of_birth' => [
-                'nullable',
-                'date',
-                'before:today',
+            'profile' => [
+                'name' => [
+                    'nullable',
+                    'string',
+                    'max:50',
+                ],
+                'bio' => [
+                    'nullable',
+                    'string',
+                    'max:1048',
+                ],
+                'phone' => [
+                    'nullable',
+                    'string',
+                    'max:255',
+                ],
+                'date_of_birth' => [
+                    'nullable',
+                    'date',
+                    'before:today',
+                ],
             ],
         ];
     }

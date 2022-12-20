@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\UserCreated;
-use App\Notifications\Welcome;
+use App\Events\User\Created;
+use App\Notifications\Welcome as WelcomeUser;
 
 class SendWelcomeNotification
 {
-    public function handle(UserCreated $event): void
+    public function handle(Created $event): void
     {
-        $event->user->notify(new Welcome($event->user));
+        $event->user->notify(new WelcomeUser($event->user));
     }
 }

@@ -14,7 +14,6 @@ class ProfileResource extends JsonResource
             'bio' => $this->bio,
             'phone' => $this->phone,
             'phone_verified_at' => $this->phone_verified_at ? $this->phone_verified_at->format('Y-m-d H:i:s') : null,
-            'avatar' => $this->avatar,
         ];
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Inertia\Response as InertiaResponse;
 
 class ProfileController extends Controller
 {
@@ -21,7 +22,7 @@ class ProfileController extends Controller
     ) {
     }
 
-    public function edit(): Response
+    public function edit(): InertiaResponse
     {
         return Inertia::render('Profile/Edit',
             [
@@ -31,28 +32,19 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $this->userRepository->updateUser($request->user(), $request->validated());
+        $this->userRepository->update($request->user(), $request->validated());
 
-        return Redirect::route('profile.edit');
-    }
-
-    public function updateAvatar(UpdateAvatarRequest $request): RedirectResponse
-    {
-        if ($request->hasFile('avatar')) {
-            $this->userRepository->updateAvatar($request->user(), $request->file('avatar'));
-        }
-
-        return Redirect::route('profile.edit');
+        return back();
     }
 
     public function destroy(ProfileDestroyRequest $request): RedirectResponse
     {
-        $request->user()->delete();
+        $this->userRepository->delete($request->user());
+
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        Auth::logout();
 
         return Redirect::to('/');
     }

@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function getAllUsers(): Collection
-    {
-        return User::all();
+    public function __construct(
+        private ProfileRepository $profileRepository,
+    ) {
     }
 
-    public function createUser($userData): User
+    public function create($userData): User
     {
         return User::create([
             'username' => $userData['username'],
@@ -22,23 +22,15 @@ class UserRepository implements UserRepositoryInterface
         ]);
     }
 
-    public function updateUser(User $user, array $newUserData): bool
+    public function update(User $user, array $newUserData): void
     {
-        if ($user->emailIsDirty($newUserData['email'])) {
-            $user->email_verified_at = null;
-        }
+        $user->update($newUserData);
 
-        return $user->update($newUserData);
+        $this->profileRepository->update($user->profile, $newUserData['profile']);
     }
 
-    public function deleteUser(User $user): ?bool
+    public function delete(User $user): ?bool
     {
-        return $user->delete();
-    }
-
-    public function updateAvatar(User $user, $file)
-    {
-        $user->profile->getMedia('avatars')->each->delete();
-        $user->profile->addMedia($file)->toMediaCollection('avatars', 'media.avatars');
+        return $user->forceDelete();
     }
 }

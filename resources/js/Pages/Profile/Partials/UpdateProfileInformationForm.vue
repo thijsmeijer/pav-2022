@@ -43,7 +43,7 @@
                                         id="name"
                                         type="text"
                                         class="mt-1 block w-full"
-                                        v-model="form.name"
+                                        v-model="form.profile.name"
                                         @input="delete errors.name && form.validate('name')"
                                     />
                                 </div>
@@ -92,7 +92,7 @@
                                     id="dob"
                                     type="date"
                                     class="mt-1 block w-full"
-                                    v-model="form.date_of_birth"
+                                    v-model="form.profile.date_of_birth"
                                     @input="delete errors.date_of_birth && form.validate('date_of_birth')"
                                 />
                             </div>
@@ -122,7 +122,7 @@
                                     name="about"
                                     rows="10"
                                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    v-model="form.bio"
+                                    v-model="form.profile.bio"
                                     @input="delete errors.bio && form.validate('bio')"
                                 />
                             </div>
@@ -193,10 +193,12 @@ export default {
         const form = usePrecognitiveForm('patch', route('profile.update'), useForm({
             username: props.user.username,
             email: props.user.email,
-            name: props.user.profile.name,
-            bio: props.user.profile.bio,
-            date_of_birth: props.user.profile.date_of_birth,
-            phone: props.user.profile.phone,
+            profile: {
+                name: props.user.profile.name,
+                bio: props.user.profile.bio,
+                date_of_birth: props.user.profile.date_of_birth,
+                phone: props.user.profile.phone,
+            },
         }));
 
         const avatarForm = useForm({
@@ -225,7 +227,7 @@ export default {
             this.avatarForm.avatar = file;
         },
         updateAvatar() {
-            this.avatarForm.post(route('profile.avatar'), {
+            this.avatarForm.post(route('avatar.update'), {
                 preserveScroll: true,
                 preserveState: false,
                 onSuccess: () => {

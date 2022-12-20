@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\UserCreated;
+use App\Events\User\Created;
 use App\Listeners\SendWelcomeNotification;
 use App\Models\Profile;
 use App\Models\User;
@@ -14,7 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        UserCreated::class => [
+        Created::class => [
             SendWelcomeNotification::class,
         ],
     ];

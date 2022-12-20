@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
@@ -32,8 +33,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function () {
     Route::singleton('profile', ProfileController::class);
-    Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
     Route::delete('/profile-delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('profile/avatar', [AvatarController::class, 'update'])->name('avatar.update');
 });
 
 require __DIR__.'/auth.php';
