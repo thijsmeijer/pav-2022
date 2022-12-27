@@ -5,17 +5,21 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasSlug;
 
     protected $fillable = [
         'username',
+        'slug',
         'email',
         'password',
         'email_verified_at',
@@ -30,9 +34,26 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('username')
+            ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function profile(): hasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function lists(): HasMany
+    {
+        return $this->hasMany(UserList::class);
     }
 
     public function canAccessFilament(): bool

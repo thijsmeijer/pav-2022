@@ -110,6 +110,7 @@ return [
 
     'filament' => [
         'user' => [
+            'id' => 1,
             'email' => env('FILAMENT_ADMIN_EMAIL'),
             'password' => env('FILAMENT_ADMIN_PASSWORD'),
         ],

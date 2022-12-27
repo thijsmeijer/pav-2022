@@ -39,3 +39,4 @@ Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function (
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/list.php';
