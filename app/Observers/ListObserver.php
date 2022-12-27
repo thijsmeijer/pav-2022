@@ -14,6 +14,7 @@ class ListObserver
      */
     public function created(UserList $list): void
     {
+        // TODO: check if thumbnail is uploaded with list creation, only add the list image if no thumbnail is provided.
         $list
             ->addMedia(public_path('images/list.png'))
             ->preservingOriginal()
