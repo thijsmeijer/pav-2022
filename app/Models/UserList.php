@@ -43,4 +43,11 @@ class UserList extends Model implements HasMedia
             get: fn () => $this->getMedia('thumbnails')->first()->getUrl()
         );
     }
+
+    public function hasThumbnail(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getMedia('thumbnails')->first()
+        );
+    }
 }
