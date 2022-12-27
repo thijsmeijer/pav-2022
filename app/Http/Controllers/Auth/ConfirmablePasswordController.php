@@ -13,7 +13,6 @@ use Inertia\Response as InertiaResponse;
 
 class ConfirmablePasswordController extends Controller
 {
-
     public function show(): InertiaResponse
     {
         return Inertia::render('Auth/ConfirmPassword');

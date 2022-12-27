@@ -8,7 +8,6 @@ use App\Models\User;
 
 class ProfileRepository implements ProfileRepositoryInterface
 {
-
     public function update(Profile $profile, array $data)
     {
         $profile->update($data);

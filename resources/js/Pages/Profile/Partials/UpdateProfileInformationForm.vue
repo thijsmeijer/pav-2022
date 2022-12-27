@@ -7,33 +7,6 @@
                         <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
                         <p class="mt-1 text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
                     </div>
-                    <div class="flex items-center">
-                        <div class="mt-6 w-10 h-10 rounded-full mr-4 mb-4">
-                            <div>
-                                <img class="w-10 h-10 rounded-full bg-gray-200 border-2" :src="avatarPreview || avatar" alt="profile_image">
-                            </div>
-                        </div>
-                        <div class="flex items-center relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none hover:text-indigo-500">
-                            <input type="file" @change="uploadAvatarPreview($event.target.files[0])"/>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-4">
-                        <button
-                            type="submit"
-                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
-                            @click.prevent="updateAvatar"
-                            :disabled="avatarForm.processing"
-                            :class="{'opacity-50 cursor-not-allowed': avatarForm.processing}"
-                        >
-                            Save avatar
-                        </button>
-
-                        <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                            <p v-if="avatarForm.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
-                        </Transition>
-                    </div>
-
                     <div>
                         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                             <div class="sm:col-span-3">
@@ -66,7 +39,7 @@
                         </div>
                         <div v-if="!user.email_verified_at">
                             <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                                Your email address is unverified.
+                                Your email address is unverified. A new verification email has been sent to your email address.
                                 <button
                                     type="button"
                                     class="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
@@ -145,7 +118,7 @@
                 </button>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-green-400">Profile Saved.</p>
                 </Transition>
             </div>
         </div>
@@ -179,14 +152,10 @@ export default {
             type: Object,
             required: false,
         },
-        avatar: {
-            type: String,
-        }
     },
     data () {
         return {
             status: null,
-            avatarPreview: null,
         };
     },
     setup(props) {
@@ -201,12 +170,8 @@ export default {
             },
         }));
 
-        const avatarForm = useForm({
-            avatar: null,
-        });
-
         return {
-            form, avatarForm
+            form
         };
     },
     methods: {
@@ -222,25 +187,6 @@ export default {
             this.form.patch(route('profile.update'), {
                 preserveScroll: true,
             });
-        },
-        uploadAvatarPreview(file) {
-            this.avatarForm.avatar = file;
-        },
-        updateAvatar() {
-            this.avatarForm.post(route('avatar.update'), {
-                preserveScroll: true,
-                preserveState: false,
-                onSuccess: () => {
-                    this.form.avatar = null;
-                },
-            });
-        },
-    },
-    watch: {
-        'avatarForm.avatar': function (file) {
-            if (file) {
-                this.avatarPreview = URL.createObjectURL(file);
-            }
         },
     },
 };

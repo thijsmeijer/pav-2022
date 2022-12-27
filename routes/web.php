@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\Profile\AvatarController;
-use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,13 +27,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function () {
-    Route::singleton('profile', ProfileController::class);
-    Route::delete('/profile-delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::post('profile/avatar', [AvatarController::class, 'update'])->name('avatar.update');
-});
 
 require __DIR__.'/auth.php';
 require __DIR__.'/list.php';

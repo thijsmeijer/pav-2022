@@ -19,8 +19,9 @@ class UserObserver
         if ($user->isDirty('email')) {
             $user->sendEmailVerificationNotification();
 
-            $user->email_verified_at = null;
-            $user->saveQuietly();
+            $user->updateQuietly([
+                'email_verified_at' => null,
+            ]);
         }
     }
 }

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
-
 class RegisteredUserController extends Controller
 {
     public function __construct(

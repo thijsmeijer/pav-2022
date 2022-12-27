@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Profile;
-use Illuminate\Support\Facades\File;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
