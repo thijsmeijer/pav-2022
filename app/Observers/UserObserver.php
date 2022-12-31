@@ -9,9 +9,9 @@ class UserObserver
 {
     public function created(User $user): void
     {
-        event(new UserCreated($user));
-
         $user->profile()->create();
+
+        event(new UserCreated($user));
     }
 
     public function updated(User $user): void
