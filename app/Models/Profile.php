@@ -14,15 +14,7 @@ class Profile extends Model implements HasMedia
 
     protected $fillable = [
         'name',
-        'date_of_birth',
-        'phone',
-        'phone_verified_at',
-        'bio',
-    ];
-
-    protected $casts = [
-        'date_of_birth' => 'date',
-        'phone_verified_at' => 'datetime',
+        'about',
     ];
 
     public function user(): belongsTo

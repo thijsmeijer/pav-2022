@@ -4,7 +4,7 @@
             <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
                 <div>
                     <a :href="route('dashboard')">
-                        <img class="w-64" src="/images/logo.png" alt="">
+                        <ApplicationLogo class="w-64" />
                     </a>
                 </div>
                 <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="flex items-center justify-end mt-4">
                         <Link
-                            :href="route('login')"
+                            :href="route('register')"
                             class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                         >
                             No account?
@@ -58,6 +58,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Checkbox from '@/Components/Checkbox.vue';
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 export default {
     name: "Login",
@@ -68,7 +69,8 @@ export default {
         InputLabel,
         TextInput,
         PrimaryButton,
-        Checkbox
+        Checkbox,
+        ApplicationLogo
     },
     props: {
       canResetPassword: {
