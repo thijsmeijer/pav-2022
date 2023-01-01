@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                                <div class="ml-3 relative" v-if="$page.props.auth.user">
+                                <div class="ml-3 relative" v-if="$page.props.user">
                                     <div class="ml-3 relative">
                                         <Dropdown align="right" width="48">
                                             <template #trigger>
@@ -102,7 +102,7 @@
                                 </svg>
                                 <span>Home</span>
                             </Link>
-                            <span v-if="$page.props.auth.user">
+                            <span v-if="$page.props.user">
                                 <Link :href="route('profile.edit')"
                                       class="p-3 flex border-r-4 text-slate-800 space-x-3 font-semibold">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"

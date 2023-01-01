@@ -14,7 +14,7 @@ class ListObserver
      */
     public function created(UserList $list): void
     {
-        if(!$list->has_thumbnail) {
+        if (! $list->has_thumbnail) {
             $list
                 ->addMedia(public_path('images/list.png'))
                 ->preservingOriginal()

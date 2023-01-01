@@ -9,10 +9,12 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Lists\PrivateListController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -39,6 +41,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->middleware('verified')->name('dashboard');
+
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 
@@ -66,4 +72,7 @@ Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function (
     Route::delete('/profile-delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('profile/avatar', [AvatarController::class, 'update'])->name('avatar.update');
+
+    Route::get('/profile/my-lists', [PrivateListController::class, 'index'])->name('profile.lists');
+    Route::get('/lists/create', [PrivateListController::class, 'create'])->name('lists.create');
 });
