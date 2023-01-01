@@ -14,7 +14,7 @@ use Inertia\Response as InertiaResponse;
 class RegisteredUserController extends Controller
 {
     public function __construct(
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $user
     ) {
     }
 
@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
 
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $user = $this->userRepository->createUser($request->validated());
+        $user = $this->user->create($request->validated());
 
         Auth::login($user);
 
