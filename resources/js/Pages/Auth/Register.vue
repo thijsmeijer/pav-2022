@@ -77,7 +77,7 @@
                             :disabled="form.processing"
                             @click.prevent="submit"
                         >
-                            Register
+                            Sign Up
                         </PrimaryButton>
                     </div>
                 </div>
