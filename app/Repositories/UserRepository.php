@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 
-class UserRepository implements UserRepositoryInterface
+readonly class UserRepository implements UserRepositoryInterface
 {
     public function __construct(
         private ProfileRepository $profileRepository,

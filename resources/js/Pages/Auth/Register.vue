@@ -1,98 +1,125 @@
-<script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+<template>
+    <div class="min-h-screen bg-gray-100 flex flex-col">
+        <main class="h-full flex flex-col flex-grow">
+            <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+                <div>
+                    <a :href="route('dashboard')">
+                        <img class="w-64" src="/images/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                    <div>
+                        <InputLabel for="username" value="Username" />
+
+                        <TextInput
+                            id="username"
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="form.username"
+                            @input="form.validate('username')"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.username" />
+                    </div>
+
+                    <div class="mt-4">
+                        <InputLabel for="email" value="Email" />
+
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            @input="form.validate('email')"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+
+                    <div class="mt-4">
+                        <InputLabel for="password" value="Password" />
+
+                        <TextInput
+                            id="password"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password"
+                            @input="form.validate('password')"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password" />
+                    </div>
+
+                    <div class="mt-4">
+                        <InputLabel for="password_confirmation" value="Confirm Password" />
+
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            class="mt-1 block w-full"
+                            v-model="form.password_confirmation"
+                            @input="form.validate('password')"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                    </div>
+                    <div class="flex items-center justify-end mt-4">
+                        <Link
+                            :href="route('login')"
+                            class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        >
+                            Already registered?
+                        </Link>
+
+                        <PrimaryButton
+                            class="ml-4"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                            @click.prevent="submit"
+                        >
+                            Register
+                        </PrimaryButton>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</template>
+
+<script>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { usePrecognitiveForm} from "laravel-precognition-vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import { usePrecognitiveForm} from "laravel-precognition-vue";
 
-const form = usePrecognitiveForm('post', route('register'), useForm({
-    username: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-}));
+export default {
+    name: "Register",
+    components: {
+        Head,
+        Link,
+        InputError,
+        InputLabel,
+        TextInput,
+        PrimaryButton
+    },
+    setup () {
+        const form = usePrecognitiveForm('post', route('register'), useForm({
+            username: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+        }));
 
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
-};
+        return { form }
+    },
+    methods: {
+        submit() {
+            this.form.post(route('register'), {
+                onFinish: () => form.reset('password', 'password_confirmation'),
+            });
+        }
+    }
+}
 </script>
-
-<template>
-    <GuestLayout>
-        <Head title="Register" />
-
-        <form @submit.prevent="submit" class="max-w-lg mx-2 mt-12 p-6 sm:mt-48 sm:mx-auto sm:shadow-md sm:rounded-lg sm:border">
-            <div>
-                <InputLabel for="username" value="Username" />
-
-                <TextInput
-                    id="username"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.username"
-                    @change="form.validate('username')"
-                />
-
-                <InputError class="mt-2" :message="form.errors.username" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    @change="form.validate('email')"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    @change="form.validate('password')"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
-</template>
