@@ -75,4 +75,5 @@ Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function (
 
     Route::get('/profile/my-lists', [PrivateListController::class, 'index'])->name('profile.lists');
     Route::get('/lists/create', [PrivateListController::class, 'create'])->name('lists.create');
+    Route::post('/lists', [PrivateListController::class, 'store'])->name('lists.store');
 });

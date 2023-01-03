@@ -27,7 +27,6 @@ class EventServiceProvider extends ServiceProvider
 
         User::observe(UserObserver::class);
         Profile::observe(ProfileObserver::class);
-        UserList::observe(ListObserver::class);
     }
 
     public function shouldDiscoverEvents(): bool
