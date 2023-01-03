@@ -50,7 +50,11 @@
 </template>
 
 <script>
+import {Link} from "@inertiajs/inertia-vue3";
 export default {
-    name: "HamburgerMenu"
+    name: "HamburgerMenu",
+    components: {
+        Link
+    }
 }
 </script>

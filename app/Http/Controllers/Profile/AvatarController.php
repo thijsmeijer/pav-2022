@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Redirect;
 class AvatarController extends Controller
 {
     public function __construct(
-        private readonly ProfileRepository $profileRepository
+        private readonly ProfileRepository $profile
     ) {
     }
 
     public function update(UpdateAvatarRequest $request): RedirectResponse
     {
         if ($request->hasFile('avatar')) {
-            $this->profileRepository->updateAvatar($request->user(), $request->file('avatar'));
+            $this->profile->updateAvatar($request->user(), $request->file('avatar'));
         }
 
         return Redirect::route('profile.edit');
