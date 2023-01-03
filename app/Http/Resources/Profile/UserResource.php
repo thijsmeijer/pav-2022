@@ -14,7 +14,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
             'profile' => new ProfileResource($this->profile),
-            'lists' => ListIndexResource::collection($this->lists),
+            'lists' => ListIndexResource::collection($this->lists->sortByDesc('created_at')),
         ];
     }
 }

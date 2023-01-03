@@ -26,7 +26,7 @@ class PrivateListController extends Controller
 
     public function store(StoreListRequest $request)
     {
-        $this->list->create($request->all());
+        $this->list->create($request->validated());
 
         return redirect()->route('profile.lists');
     }

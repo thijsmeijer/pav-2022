@@ -23,7 +23,7 @@
                         <div>
                             <img
                                 :src="list.thumbnail"
-                                class="h-auto w-full" alt="Restaurant"
+                                class="h-32 sm:h-40 w-full" alt="list thumbnail"
                             />
                             <h2 class="text-lg font-medium leading-none text-slate-500 mb-4 px-4 py-5">
                                 {{ list.name }}

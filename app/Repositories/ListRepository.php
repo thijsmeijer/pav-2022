@@ -20,7 +20,7 @@ class ListRepository implements ListRepositoryInterface
         ]);
 
         $list
-            ->addMedia($data['thumbnail'])
+            ->addMedia($data['thumbnail'] ?? public_path('images/list.png'))
             ->preservingOriginal()
             ->toMediaCollection('thumbnails', 'media.thumbnails');
     }
