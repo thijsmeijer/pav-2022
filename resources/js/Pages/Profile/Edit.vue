@@ -1,21 +1,20 @@
 <template>
     <Head title="Profile" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout
+        @display-colors="displayColors"
+        @hide-colors="hideColors"
+    >
         <div class="z-10 inset-0">
-            <div class="absolute flex">
-                <div class="h-full w-1/2 bg-[#0a527b]" />
-            </div>
-            <div class="relative flex justify-start bg-[#2A1D5D]">
+            <div class="relative flex justify-start" :class="{ 'bg-[#2A1D5D]': colors }">
                 <header class="relative py-10">
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-3xl font-bold tracking-tight text-white">Settings</h1>
+                        <h1 class="text-3xl font-bold tracking-tight text-white hidden xl:flex">Settings</h1>
                     </div>
                 </header>
             </div>
         </div>
-
-        <div class="py-12 -mt-32 z-0 relative">
+        <div class="py-12 sm:-mt-24 z-0 relative">
             <div class="mx-auto max-w-4xl px-4 pb-6 sm:px-6 lg:px-8 lg:pb-16">
                 <div class="overflow-hidden rounded-lg bg-white shadow">
                     <div class="lg:grid lg:grid-cols-12">
@@ -155,7 +154,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import {Head, useForm} from '@inertiajs/inertia-vue3';
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -174,7 +172,6 @@ export default {
         DeleteUserForm,
         Head,
         UpdatePasswordForm,
-        UpdateProfileInformationForm,
     },
     props: {
         user: {
@@ -212,6 +209,7 @@ export default {
         return {
             status: null,
             avatarPreview: null,
+            colors: true,
         };
     },
     methods: {
@@ -243,12 +241,21 @@ export default {
                 },
             });
         },
+        displayColors() {
+            this.colors = true;
+        },
+        hideColors() {
+            this.colors = false;
+        },
     },
     watch: {
         'avatarForm.avatar': function (file) {
             if (file) {
                 this.avatarPreview = URL.createObjectURL(file);
             }
+        },
+        colors: function (value) {
+            console.log(value);
         },
     },
 };

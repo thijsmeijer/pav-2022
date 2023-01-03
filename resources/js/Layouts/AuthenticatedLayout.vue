@@ -51,7 +51,7 @@
 
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
+                                v-on:click="HamburgerTouched"
                                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -83,7 +83,7 @@
 
                 <div
                     :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
+                    class="sm:hidden bg-white"
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('profile.lists')" :active="route().current('profile.lists')">
@@ -102,7 +102,7 @@
                         <div class="mt-3 space-y-1">
                             <Link :href="route('profile.edit')"
                                   class="p-3 flex border-r-4 text-slate-800 space-x-3 font-semibold">
-                                <img :src="$page.props.avatar" >
+                                <img :src="$page.props.avatar" class="w-6 h-6 rounded-full border">
                                 <span>Profile</span>
                             </Link>
                             <Link :href="route('logout')" method="post"
@@ -156,6 +156,17 @@ export default {
         const showingNavigationDropdown = ref(false);
 
         return { showingNavigationDropdown }
+    },
+    methods: {
+        HamburgerTouched() {
+            this.showingNavigationDropdown = !this.showingNavigationDropdown;
+
+            if (this.showingNavigationDropdown) {
+                this.$emit('hide-colors');
+            } else {
+                this.$emit('display-colors');
+            }
+        }
     }
 }
 </script>
