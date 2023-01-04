@@ -74,6 +74,7 @@ Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function (
     Route::post('profile/avatar', [AvatarController::class, 'update'])->name('avatar.update');
 
     Route::get('/profile/my-lists', [PrivateListController::class, 'index'])->name('profile.lists');
+    Route::get('/lists/{list}', [PrivateListController::class, 'show'])->name('profile.list.show');
     Route::get('/lists/create', [PrivateListController::class, 'create'])->name('lists.create');
     Route::post('/lists', [PrivateListController::class, 'store'])->name('lists.store');
 });

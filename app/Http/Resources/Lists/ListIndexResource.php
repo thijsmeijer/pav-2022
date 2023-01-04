@@ -10,6 +10,7 @@ class ListIndexResource extends JsonResource
     {
         return [
             'name' => $this->name,
+            'slug' => $this->slug,
             'excerpt' => $this->excerpt,
             'description' => $this->description,
             'thumbnail' => $this->thumbnail,

@@ -19,7 +19,8 @@
                     </button>
                     <div v-for="list in user.lists"
                          :key="list.id"
-                         class="overflow-hidden rounded-md shadow-xl m-2 flex flex-col justify-between">
+                         class="overflow-hidden rounded-md shadow-xl m-2 flex flex-col justify-between cursor-pointer"
+                         @click.prevent="view(list)">
                         <div>
                             <img
                                 :src="list.thumbnail"
@@ -57,6 +58,9 @@ export default {
     methods: {
         create() {
             Inertia.get(route('lists.create'));
+        },
+        view(list) {
+            Inertia.get(route('profile.list.show', {list: list}));
         }
     }
 }
