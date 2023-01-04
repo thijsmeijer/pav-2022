@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Lists\PublicListController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,6 +24,5 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/{user}/lists', [PublicListController::class, 'index'])->name('user.lists');
-
 require __DIR__.'/auth.php';
+require __DIR__.'/list.php';

@@ -255,9 +255,6 @@ export default {
                 this.avatarPreview = URL.createObjectURL(file);
             }
         },
-        colors: function (value) {
-            console.log(value);
-        },
     },
 };
 </script>

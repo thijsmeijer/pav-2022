@@ -6,8 +6,6 @@ use App\Events\User\Created;
 use App\Listeners\SendWelcomeNotification;
 use App\Models\Profile;
 use App\Models\User;
-use App\Models\UserList;
-use App\Observers\ListObserver;
 use App\Observers\ProfileObserver;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

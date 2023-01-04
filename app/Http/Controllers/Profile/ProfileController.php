@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileDestroyRequest;
 use App\Http\Requests\Profile\ProfileUpdateRequest;
-use App\Http\Resources\Profile\UserResource;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;

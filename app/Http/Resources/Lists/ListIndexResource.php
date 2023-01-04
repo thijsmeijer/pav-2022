@@ -14,6 +14,7 @@ class ListIndexResource extends JsonResource
             'excerpt' => $this->excerpt,
             'description' => $this->description,
             'thumbnail' => $this->thumbnail,
+            'status' => $this->status->value,
         ];
     }
 }

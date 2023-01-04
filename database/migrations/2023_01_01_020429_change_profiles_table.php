@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('about')->after('name')->nullable();
         });
     }
+
     public function down(): void
     {
         Schema::table('profiles', function (Blueprint $table) {

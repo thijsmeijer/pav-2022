@@ -9,9 +9,6 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\Lists\PrivateListController;
-use App\Http\Controllers\Profile\AvatarController;
-use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -65,16 +62,4 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
-});
-
-Route::middleware(['auth', HandlePrecognitiveRequests::class])->group(function () {
-    Route::singleton('profile', ProfileController::class);
-    Route::delete('/profile-delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::post('profile/avatar', [AvatarController::class, 'update'])->name('avatar.update');
-
-    Route::get('/profile/my-lists', [PrivateListController::class, 'index'])->name('profile.lists');
-    Route::get('/lists/{list}', [PrivateListController::class, 'show'])->name('profile.list.show');
-    Route::get('/lists/create', [PrivateListController::class, 'create'])->name('lists.create');
-    Route::post('/lists', [PrivateListController::class, 'store'])->name('lists.store');
 });

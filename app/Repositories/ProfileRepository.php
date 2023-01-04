@@ -15,7 +15,9 @@ class ProfileRepository implements ProfileRepositoryInterface
 
     public function updateAvatar(User $user, $file)
     {
-        $user->profile->getMedia('avatars')->each->delete();
-        $user->profile->addMedia($file)->toMediaCollection('avatars', 'media.avatars');
+        $user
+            ->profile
+            ->clearMediaCollection('avatars')
+            ->addMedia($file)->toMediaCollection('avatars', 'media.avatars');
     }
 }
