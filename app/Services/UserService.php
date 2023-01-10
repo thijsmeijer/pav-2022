@@ -32,6 +32,7 @@ class UserService
             ->user()
             ->profile
             ->clearMediaCollection('avatars')
-            ->addMedia($file)->toMediaCollection('avatars', 'media.avatars');
+            ->addMedia($file)
+            ->toMediaCollection('avatars', 'media.avatars');
     }
 }

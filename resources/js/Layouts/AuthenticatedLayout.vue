@@ -16,6 +16,13 @@
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <Link
                                     class="flex justify-center items-center text-white hover:text-amber-400 font-bold"
+                                    :class="{'text-amber-400': route().current('movies.index')}"
+                                    :href="route('movies.index')"
+                                >
+                                    Movies
+                                </Link>
+                                <Link
+                                    class="flex justify-center items-center text-white hover:text-amber-400 font-bold"
                                     :class="{'text-amber-400': route().current('profile.lists')}"
                                     :href="route('profile.lists')"
                                 >

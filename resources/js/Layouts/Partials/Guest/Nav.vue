@@ -2,17 +2,31 @@
     <nav class="sticky top-0 z-50 bg-blue-500">
         <div class="bg-[#2A1D5D] border-b border-gray-200 shadow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16 items-center">
+                <div class="flex justify-between h-16">
                     <div class="flex">
                         <div class="shrink-0 flex items-center">
                             <Link :href="route('home')">
                                 <ApplicationLogoWhite class="block h-9 w-auto fill-current"/>
                             </Link>
                         </div>
-                    </div>
 
-                    <div class="hidden sm:relative sm:space-x-6 sm:flex">
-                        <!-- links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <Link
+                                class="flex justify-center items-center text-white hover:text-amber-400 font-bold"
+                                :class="{'text-amber-400': route().current('movies.index')}"
+                                :href="route('movies.index')"
+                            >
+                                Movies
+                            </Link>
+                            <Link
+                                v-show="$page.props.user"
+                                class="flex justify-center items-center text-white hover:text-amber-400 font-bold"
+                                :class="{'text-amber-400': route().current('profile.lists')}"
+                                :href="route('profile.lists')"
+                            >
+                                Lists
+                            </Link>
+                        </div>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -64,10 +78,9 @@
                     </div>
 
                     <div class="sm:hidden">
-                        <!--             Hamburger button               -->
                         <button type="button"
                                 @click="toggleMenu"
-                                class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400">
+                                class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 mt-3">
                             <span class="sr-only">Open main menu</span>
                             <svg v-if="!showMenu" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
