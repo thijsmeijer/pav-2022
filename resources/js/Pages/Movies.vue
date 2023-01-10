@@ -21,29 +21,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-                    <div v-for="movie in movies" :key="movie.id" class="flex items-stretch">
-                        <div
-                            class="overflow-hidden rounded-md shadow-xl flex flex-col"
-                        >
-                            <div class="relative bg-gray-900">
-                                <img
-                                    v-show="movie.poster"
-                                    :src="movie.poster"
-                                    class="h-auto w-full"
-                                    alt="Movie poster"
-                                />
-                            </div>
-                            <div class="flex flex-col justify-between p-5 h-full">
-                                <div>
-                                    <h2 class="text-lg font-medium leading-none text-slate-500 mb-4">
-                                        {{ movie.title }}
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <MovieGrid :movies="movies" />
             </div>
         </div>
     </GuestLayout>
@@ -52,10 +30,13 @@
 <script>
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import MovieGrid from "@/Components/MovieGrid.vue";
+import {useDebounce} from "@vueuse/core";
 
 export default {
     name: "Movies",
     components: {
+        MovieGrid,
         GuestLayout,
         Head
     },
@@ -75,9 +56,12 @@ export default {
         });
 
         const search = () => {
-            form.get(route('search'), {
-                preserveState: true
-            });
+            useDebounce(() => {
+                form.get(route('movies.index'), {
+                    preserveState: true,
+                    preserveScroll: true,
+                });
+            }, 300);
         };
 
         return {

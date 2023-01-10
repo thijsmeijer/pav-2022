@@ -27,7 +27,7 @@ class MoviesHelper
 
     public static function addPostersUrl($movies): array
     {
-        return $movies->map(function ($movie) {
+        return collect($movies)->map(function ($movie) {
             return self::addPosterUrl($movie);
         })->toArray();
     }
