@@ -17,7 +17,7 @@ class AvatarController extends Controller
 
     public function update(UpdateAvatarRequest $request): RedirectResponse
     {
-        if($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar')) {
             $this->user->updateAvatar($request->file('avatar'));
         }
 

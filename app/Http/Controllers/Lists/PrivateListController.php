@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Lists;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Lists\StoreListRequest;
 use App\Http\Requests\Lists\UpdateListRequest;
-use App\Http\Resources\Lists\ListResource;
 use App\Http\Resources\Lists\PrivateListResource;
 use App\Models\UserList;
 use App\Services\ListService;

@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\User\UserCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class AddAvatarToUser
 {
