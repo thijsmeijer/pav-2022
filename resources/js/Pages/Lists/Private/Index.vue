@@ -60,7 +60,7 @@ export default {
             Inertia.get(route('lists.create'));
         },
         view(list) {
-            Inertia.get(route('profile.list.show', {list: list}));
+            Inertia.get(route('profile.lists.show', {list: list}));
         }
     }
 }

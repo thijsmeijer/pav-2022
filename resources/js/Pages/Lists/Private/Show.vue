@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         edit() {
-            Inertia.get(route('lists.edit', this.list));
+            Inertia.get(route('profile.lists.edit', this.list));
         }
     }
 }

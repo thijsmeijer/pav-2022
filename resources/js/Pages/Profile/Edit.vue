@@ -144,10 +144,7 @@
                             <p v-if="form.recentlySuccessful" class="text-sm text-green-400">Profile Saved.</p>
                         </Transition>
 
-                        <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                            <p v-if="form.isDirty || avatarForm.isDirty" class="text-sm text-red-400">Unsaved Changes.</p>
-                        </Transition>
-
+                        <p v-if="form.isDirty || avatarForm.isDirty" class="text-sm text-red-400">Unsaved Changes.</p>
                     </div>
                 </div>
             </div>
@@ -238,7 +235,7 @@ export default {
             this.avatarForm.avatar = file;
         },
         saveAvatar() {
-            this.avatarForm.post(route('avatar.update'), {
+            this.avatarForm.patch(route('profile.avatar.update'), {
                 preserveScroll: true,
             });
         },

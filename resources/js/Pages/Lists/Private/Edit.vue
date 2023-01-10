@@ -147,7 +147,7 @@ export default {
             this.thumbnailForm.thumbnail = file;
         },
         update() {
-            this.form.patch(route('lists.update', this.list), {
+            this.form.patch(route('profile.lists.update', this.list), {
                 preserveScroll: true,
                 onSuccess: () => {
                     this.updateThumbnail();

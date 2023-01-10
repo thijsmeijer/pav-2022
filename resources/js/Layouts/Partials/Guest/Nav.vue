@@ -1,22 +1,18 @@
 <template>
     <nav class="sticky top-0 z-50 bg-blue-500">
-        <div class="bg-white border-b border-gray-200 shadow">
+        <div class="bg-[#2A1D5D] border-b border-gray-200 shadow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
                     <div class="flex">
                         <div class="shrink-0 flex items-center">
-                            <Link :href="route('dashboard')">
-                                <ApplicationLogo class="block h-9 w-auto fill-current"/>
+                            <Link :href="route('home')">
+                                <ApplicationLogoWhite class="block h-9 w-auto fill-current"/>
                             </Link>
                         </div>
                     </div>
 
                     <div class="hidden sm:relative sm:space-x-6 sm:flex">
-                        <Link :href="route('dashboard')" class="text-slate-800 hover:border-b-2"
-                              :class="{'border-b-2 border-blue-500': route().current('dashboard')}"
-                        >
-                            Home
-                        </Link>
+                        <!-- links -->
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -25,10 +21,11 @@
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                                 <span class="inline-flex rounded-md">
-                                                    <button type="button"
-                                                            class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md bg-white focus:outline-none transition ease-in-out duration-150">
-
-                                                        <img :src="$page.props.avatar" class="h-8 w-8 rounded-full">
+                                                    <button
+                                                        type="button"
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md focus:outline-none transition ease-in-out duration-150"
+                                                    >
+                                                        <img :src="$page.props.avatar" class="h-8 w-8 rounded-full" alt="">
                                                     </button>
                                                 </span>
                                     </template>
@@ -96,11 +93,11 @@ import HamburgerMenu from "@/Layouts/Partials/Guest/HamburgerMenu.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import {Link} from "@inertiajs/inertia-vue3";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import ApplicationLogoWhite from "@/Components/ApplicationLogoWhite.vue";
 
 export default {
     name: "GuestNav",
-    components: {ApplicationLogo, HamburgerMenu, Dropdown, DropdownLink, Link},
+    components: {ApplicationLogoWhite, HamburgerMenu, Dropdown, DropdownLink, Link},
     data() {
         return {
             showMenu: false
