@@ -4,11 +4,11 @@
         <div class="max-w-6xl mx-6 mt-10 lg:mx-auto">
             <div>
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">title</h2>
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Popular movies</h2>
                     <a
                         class="bg-amber-400 text-black px-3 py-1 rounded-full hover:bg-blue-700 hover:text-white duration-100 font-semibold cursor-pointer"
                     >
-                        See all
+                        Search for more
                     </a>
                 </div>
 
