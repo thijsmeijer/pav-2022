@@ -6,10 +6,10 @@
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Popular movies</h2>
                     <a
-                        :href="route('search')"
+                        :href="route('movies.index')"
                         class="bg-amber-400 text-black px-3 py-1 rounded-full hover:bg-blue-700 hover:text-white duration-100 font-semibold cursor-pointer"
                     >
-                        Search for more
+                        See all movies
                     </a>
                 </div>
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
-class SearchController extends Controller
+class MoviesController extends Controller
 {
     public function __invoke(Request $request)
     {

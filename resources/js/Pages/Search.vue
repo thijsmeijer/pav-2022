@@ -28,7 +28,7 @@
                         >
                             <div class="relative bg-gray-900">
                                 <img
-                                    v-if="movie.poster"
+                                    v-show="movie.poster"
                                     :src="movie.poster"
                                     class="h-auto w-full"
                                     alt="Movie poster"
@@ -76,10 +76,7 @@ export default {
 
         const search = () => {
             form.get(route('search'), {
-                preserveState: true,
-                onSuccess: (page) => {
-
-                },
+                preserveState: true
             });
         };
 

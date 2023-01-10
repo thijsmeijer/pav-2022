@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MoviesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/search', SearchController::class)->name('search');
+Route::get('/search', MoviesController::class)->name('movies.index');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/list.php';
