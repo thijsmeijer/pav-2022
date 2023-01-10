@@ -9,11 +9,7 @@ class UpdateAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => [
-                'required',
-                'image',
-                'max:1024',
-            ],
+            'avatar' => ['nullable', 'image', 'max:10240'],
         ];
     }
 }
