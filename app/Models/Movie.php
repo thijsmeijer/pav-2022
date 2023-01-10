@@ -18,4 +18,8 @@ class Movie extends Model implements hasMedia
         'tmdb_id',
         'poster_path',
     ];
+
+    protected $casts = [
+        'release_date' => 'date',
+    ];
 }

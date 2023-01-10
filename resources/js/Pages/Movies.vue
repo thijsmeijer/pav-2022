@@ -61,7 +61,7 @@ export default {
                     preserveState: true,
                     preserveScroll: true,
                 });
-            }, 150);
+            }, 50);
         };
 
         return {
