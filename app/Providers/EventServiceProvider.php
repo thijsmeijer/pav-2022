@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\User\Created;
+use App\Events\List\ListCreated;
+use App\Events\User\UserCreated;
+use App\Listeners\AddAvatarToUser;
+use App\Listeners\AddThumbnailToList;
 use App\Listeners\SendWelcomeNotification;
 use App\Models\Profile;
 use App\Models\User;
@@ -14,8 +17,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        Created::class => [
+        UserCreated::class => [
+            AddAvatarToUser::class,
             SendWelcomeNotification::class,
+        ],
+        ListCreated::class => [
+            AddThumbnailToList::class,
         ],
     ];
 
@@ -24,7 +31,6 @@ class EventServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
 
         User::observe(UserObserver::class);
-        Profile::observe(ProfileObserver::class);
     }
 
     public function shouldDiscoverEvents(): bool

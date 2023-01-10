@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Events\User\Created as UserCreated;
+use App\Events\User\UserCreated;
 use App\Models\User;
 
 class UserObserver
@@ -11,7 +11,7 @@ class UserObserver
     {
         $user->profile()->create();
 
-        event(new UserCreated($user));
+        UserCreated::dispatch($user);
     }
 
     public function updated(User $user): void

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Lists;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Lists\UpdateThumbnailRequest;
 use App\Models\UserList;
-use App\Repositories\ListRepository;
+use App\Services\ListService;
+use Illuminate\Support\Facades\Redirect;
 
 class ThumbnailController extends Controller
 {
     public function __construct(
-        public ListRepository $list,
+        public ListService $list,
     ) {
     }
 
@@ -20,6 +21,6 @@ class ThumbnailController extends Controller
             $this->list->updateThumbnail($list, $request->file('thumbnail'));
         }
 
-        return redirect()->route('lists.edit', $list);
+        return Redirect::route('profile.lists.edit', $list);
     }
 }

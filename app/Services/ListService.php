@@ -1,31 +1,28 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services;
 
 use App\Enums\ListStatus;
-use App\Interfaces\ListRepositoryInterface;
+use App\Events\List\ListCreated;
 use App\Models\UserList;
 use Illuminate\Http\UploadedFile;
 
-class ListRepository implements ListRepositoryInterface
+class ListService
 {
-    public function create(array $data)
+    public function create(array $data): void
     {
         $list = UserList::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->id(),
             'name' => $data['name'],
             'excerpt' => $data['excerpt'],
             'description' => $data['description'],
             'status' => ListStatus::Private,
         ]);
 
-        $list
-            ->addMedia($data['thumbnail'] ?? public_path('images/list.png'))
-            ->preservingOriginal()
-            ->toMediaCollection('thumbnails', 'media.thumbnails');
+        ListCreated::dispatch($list, $data['thumbnail']);
     }
 
-    public function update(UserList $list, array $data)
+    public function update(UserList $list, array $data): void
     {
         $list->update([
             'name' => $data['name'],
@@ -35,7 +32,7 @@ class ListRepository implements ListRepositoryInterface
         ]);
     }
 
-    public function updateThumbnail(UserList $list, UploadedFile $thumbnail)
+    public function updateThumbnail(UserList $list, UploadedFile $thumbnail): void
     {
         $list
             ->clearMediaCollection('thumbnails')

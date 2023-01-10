@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Lists;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Lists\StoreListRequest;
 use App\Http\Requests\Lists\UpdateListRequest;
-use App\Http\Resources\Lists\ListIndexResource;
+use App\Http\Resources\Lists\ListResource;
+use App\Http\Resources\Lists\PrivateListResource;
 use App\Models\UserList;
-use App\Repositories\ListRepository;
+use App\Services\ListService;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -15,7 +16,7 @@ use Inertia\Response as InertiaResponse;
 class PrivateListController extends Controller
 {
     public function __construct(
-        public ListRepository $list,
+        public ListService $list,
     ) {
     }
 
@@ -27,7 +28,7 @@ class PrivateListController extends Controller
     public function show(UserList $list): InertiaResponse
     {
         return Inertia::render('Lists/Private/Show', [
-            'list' => new ListIndexResource($list),
+            'list' => new PrivateListResource($list),
         ]);
     }
 
@@ -40,13 +41,13 @@ class PrivateListController extends Controller
     {
         $this->list->create($request->validated());
 
-        return redirect()->route('profile.lists');
+        return Redirect::route('profile.lists');
     }
 
     public function edit(UserList $list): InertiaResponse
     {
         return Inertia::render('Lists/Private/Edit', [
-            'list' => new ListIndexResource($list),
+            'list' => new PrivateListResource($list),
         ]);
     }
 
@@ -54,6 +55,6 @@ class PrivateListController extends Controller
     {
         $this->list->update($list, $request->validated());
 
-        return Redirect::route('lists.edit', $list);
+        return Redirect::route('profile.lists.edit', $list);
     }
 }

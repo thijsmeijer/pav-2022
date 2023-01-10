@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\ProfileDestroyRequest;
-use App\Http\Requests\Profile\ProfileUpdateRequest;
+use App\Http\Requests\Profile\DestroyProfileRequest;
+use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Providers\RouteServiceProvider;
-use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +16,7 @@ use Inertia\Response as InertiaResponse;
 class ProfileController extends Controller
 {
     public function __construct(
-        private readonly UserRepository $user
+        private readonly UserService $user
     ) {
     }
 
@@ -25,16 +25,16 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit');
     }
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(UpdateProfileRequest $request): RedirectResponse
     {
-        $this->user->update(auth()->user(), $request->validated());
+        $this->user->update($request->validated());
 
         return Redirect::route('profile.edit');
     }
 
-    public function destroy(ProfileDestroyRequest $request): RedirectResponse
+    public function destroy(DestroyProfileRequest $request): RedirectResponse
     {
-        $this->user->delete(auth()->user());
+        auth()->user()->forceDelete();
 
         Auth::logout();
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -14,7 +15,7 @@ use Inertia\Response as InertiaResponse;
 class RegisteredUserController extends Controller
 {
     public function __construct(
-        private readonly UserRepository $user
+        private readonly UserService $user
     ) {
     }
 
