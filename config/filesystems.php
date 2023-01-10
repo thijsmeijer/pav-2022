@@ -75,6 +75,15 @@ return [
                 'visibility' => 'private',
                 'throw' => false,
             ],
+            'movies' => [
+                'popular' => [
+                    'driver' => 'local',
+                    'root' => storage_path('app/public/media/movies/popular'),
+                    'url' => env('APP_URL').'/storage/media/movies/popular',
+                    'visibility' => 'private',
+                    'throw' => false,
+                ],
+            ],
         ],
     ],
 

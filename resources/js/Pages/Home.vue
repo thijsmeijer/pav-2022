@@ -19,8 +19,8 @@
                         >
                             <div class="relative bg-gray-900">
                                 <img
-                                    v-if="movie.poster_path"
-                                    :src=getImgUrl(movie.poster_path)
+                                    v-if="movie.poster"
+                                    :src="movie.poster"
                                     class="h-auto w-full"
                                     alt="Movie poster"
                                 />
@@ -28,7 +28,7 @@
                             <div class="flex flex-col justify-between p-5 h-full">
                                 <div>
                                     <h2 class="text-lg font-medium leading-none text-slate-500 mb-4">
-                                        {{ movie.original_title }}
+                                        {{ movie.title }}
                                     </h2>
                                 </div>
                                 <div class="space-y-0.5">
@@ -57,11 +57,6 @@ export default {
         movies: {
             type: Array,
             required: true
-        }
-    },
-    methods: {
-        getImgUrl: function (path) {
-            return "https://image.tmdb.org/t/p/original/" + path;
         }
     }
 }
