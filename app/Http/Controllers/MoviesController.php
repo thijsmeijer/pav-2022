@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MoviesHelper;
 use App\Models\PopularMovie;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
