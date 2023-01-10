@@ -1,5 +1,5 @@
 <template>
-    <Head title="Search" />
+    <Head title="Movies" />
     <GuestLayout>
         <div class="max-w-6xl mx-6 mt-10 lg:mx-auto">
             <div>
@@ -54,7 +54,7 @@ import {Head, useForm} from "@inertiajs/inertia-vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 export default {
-    name: "Search",
+    name: "Movies",
     components: {
         GuestLayout,
         Head

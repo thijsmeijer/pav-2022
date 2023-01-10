@@ -7,10 +7,11 @@ use App\Models\PopularMovie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class MoviesController extends Controller
 {
-    public function __invoke(Request $request)
+    public function index(): InertiaResponse
     {
         if (request()->search) {
             $movies = Http::get(config('services.tmdb.url').'search/movie', [
@@ -25,7 +26,7 @@ class MoviesController extends Controller
             $movies = MoviesHelper::addPosters(PopularMovie::all());
         }
 
-        return Inertia::render('Search', [
+        return Inertia::render('Movies', [
             'movies' => $movies,
             'search' => request()->search,
         ]);
