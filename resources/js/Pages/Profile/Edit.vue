@@ -235,7 +235,7 @@ export default {
             this.avatarForm.avatar = file;
         },
         saveAvatar() {
-            this.avatarForm.patch(route('profile.avatar.update'), {
+            this.avatarForm.post(route('profile.avatar.update'), {
                 preserveScroll: true,
             });
         },
