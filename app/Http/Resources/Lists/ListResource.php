@@ -4,7 +4,7 @@ namespace App\Http\Resources\Lists;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ListIndexResource extends JsonResource
+class ListResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -14,7 +14,6 @@ class ListIndexResource extends JsonResource
             'excerpt' => $this->excerpt,
             'description' => $this->description,
             'thumbnail' => $this->thumbnail,
-            'status' => $this->status->value,
         ];
     }
 }

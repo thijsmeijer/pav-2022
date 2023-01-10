@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Profile;
 
-use App\Http\Resources\Lists\ListIndexResource;
+use App\Http\Resources\Lists\ListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -14,7 +14,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
             'profile' => new ProfileResource($this->profile),
-            'lists' => ListIndexResource::collection($this->lists->sortByDesc('created_at')),
+            'lists' => ListResource::collection($this->lists->sortByDesc('created_at')),
         ];
     }
 }
