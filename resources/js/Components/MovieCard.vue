@@ -1,9 +1,9 @@
 <template>
-    <div class="overflow-hidden rounded-md shadow-xl flex flex-col h-90">
+    <div class="overflow-hidden rounded-md shadow-xl flex flex-col justify-items-end">
         <div class="bg-gray-900">
             <img
                 :src="movie.poster"
-                class="h-auto w-full"
+                class="h-96 w-full"
                 alt=""
             />
         </div>
