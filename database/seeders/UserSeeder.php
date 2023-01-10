@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'username' => 'pav',
             'email' => config('auth.filament.user.email'),
-            'password' => bcrypt(config('auth.filament.user.password')),
+            'password' => config('auth.filament.user.password'),
         ]);
     }
 }
