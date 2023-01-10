@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MoviesHelper;
 use App\Models\PopularMovie;
 use Inertia\Inertia;
 
@@ -9,14 +10,8 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $popularMovies = PopularMovie::all();
-
-        $popularMovies->each(function (PopularMovie $popularMovie) {
-            $popularMovie->poster = $popularMovie->getFirstMediaUrl('posters');
-        });
-
         return Inertia::render('Home', [
-            'movies' => $popularMovies,
+            'movies' => MoviesHelper::addPosters(PopularMovie::all()),
         ]);
     }
 }

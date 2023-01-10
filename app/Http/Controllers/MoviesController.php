@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MoviesHelper;
 use App\Models\PopularMovie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -19,17 +20,9 @@ class MoviesController extends Controller
                 'query' => request()->search,
             ])->json()['results'];
 
-            $movies = collect($movies)->map(function ($movie) {
-                $movie['poster'] = $movie['poster_path'] ? 'https://image.tmdb.org/t/p/original/'.$movie['poster_path'] : 'https://via.placeholder.com/500x750';
-
-                return $movie;
-            });
+            $movies = MoviesHelper::addPostersUrl($movies);
         } else {
-            $movies = PopularMovie::all();
-
-            $movies->each(function (PopularMovie $movie) {
-                $movie->poster = $movie->getFirstMediaUrl('posters');
-            });
+            $movies = MoviesHelper::addPosters(PopularMovie::all());
         }
 
         return Inertia::render('Search', [
