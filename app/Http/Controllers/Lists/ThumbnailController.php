@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Lists\UpdateThumbnailRequest;
 use App\Models\UserList;
 use App\Services\ListService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
 class ThumbnailController extends Controller
@@ -15,7 +16,7 @@ class ThumbnailController extends Controller
     ) {
     }
 
-    public function update(UpdateThumbnailRequest $request, UserList $list)
+    public function update(UpdateThumbnailRequest $request, UserList $list): RedirectResponse
     {
         if ($request->hasFile('thumbnail')) {
             $this->list->updateThumbnail($list, $request->file('thumbnail'));

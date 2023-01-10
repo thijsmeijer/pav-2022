@@ -28,13 +28,13 @@ class SyncPopularMoviesJob implements ShouldQueue
     private function syncMovies(): void
     {
         foreach ($this->movies as $movie) {
-            $movie = PopularMovie::create([
+             $newMovie = PopularMovie::create([
                 'title' => $movie['title'],
                 'tmdb_id' => $movie['id'],
                 'poster_path' => $movie['poster_path'],
             ]);
 
-            $this->storePoster($movie);
+            $this->storePoster($newMovie);
         }
     }
 

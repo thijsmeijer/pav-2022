@@ -8,6 +8,7 @@ use App\Http\Requests\Lists\UpdateListRequest;
 use App\Http\Resources\Lists\PrivateListResource;
 use App\Models\UserList;
 use App\Services\ListService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -36,7 +37,7 @@ class PrivateListController extends Controller
         return Inertia::render('Lists/Private/Create');
     }
 
-    public function store(StoreListRequest $request)
+    public function store(StoreListRequest $request): RedirectResponse
     {
         $this->list->create($request->validated());
 
@@ -50,7 +51,7 @@ class PrivateListController extends Controller
         ]);
     }
 
-    public function update(UpdateListRequest $request, UserList $list)
+    public function update(UpdateListRequest $request, UserList $list): RedirectResponse
     {
         $this->list->update($list, $request->validated());
 
