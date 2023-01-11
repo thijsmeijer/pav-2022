@@ -8,6 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class SyncPopularMoviesJob implements ShouldQueue
 {
@@ -42,6 +44,6 @@ class SyncPopularMoviesJob implements ShouldQueue
     {
         $movie
             ->addMediaFromUrl('https://image.tmdb.org/t/p/original'.$movie->poster_path)
-            ->toMediaCollection('posters', 'media.movies.popular');
+            ->toMediaCollection('popular_posters', 'media.movies.popular');
     }
 }
