@@ -20,6 +20,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('movies', [MoviesController::class, 'index'])->name('movies.index');
 
 Route::get('movies/{movie}', [MoviesController::class, 'show'])->name('movies.show');
+Route::post('{list}/movie/store', [MoviesController::class, 'store'])->name('lists.movie.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/list.php';

@@ -20,7 +20,7 @@ class MoviesHelper
 
     public static function addPosterUrl($movie): array
     {
-        $movie['poster'] = $movie['poster_path'] ? 'https://image.tmdb.org/t/p/original/'.$movie['poster_path'] : 'https://via.placeholder.com/500x750';
+        $movie['poster'] = $movie['poster_path'] ? 'https://image.tmdb.org/t/p/original'.$movie['poster_path'] : 'https://via.placeholder.com/500x750';
 
         return $movie;
     }

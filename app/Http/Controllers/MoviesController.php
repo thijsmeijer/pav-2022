@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MoviesHelper;
+use App\Http\Requests\Movies\StoreMovieRequest;
 use App\Models\PopularMovie;
+use App\Models\UserList;
 use App\Services\MovieService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
@@ -19,7 +22,7 @@ class MoviesController extends Controller
     {
         $movies = request()->search
             ? $this->movie->searchMovies(request()->search)
-            : MoviesHelper::addPosters(PopularMovie::all());
+            : $this->movie->findPopularMovies();
 
         return Inertia::render('Movies/Index', [
             'movies' => $movies,
@@ -32,5 +35,12 @@ class MoviesController extends Controller
         return Inertia::render('Movies/Show', [
             'movie' => $this->movie->findMovie($id),
         ]);
+    }
+
+    public function store(StoreMovieRequest $request, UserList $list): RedirectResponse
+    {
+        $this->movie->create($list, $request->validated());
+
+        return redirect()->back()->with('success', "Movie added to '".$list->name . "'");
     }
 }

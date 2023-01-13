@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Helpers\MoviesHelper;
+use App\Models\UserList;
 use Illuminate\Support\Facades\Http;
 
 class MovieService
@@ -19,11 +20,13 @@ class MovieService
 
     public function findPopularMovies(): array
     {
-        return Http::get(config('services.tmdb.url').'movie/popular', [
+        $movies = Http::get(config('services.tmdb.url').'movie/popular', [
             'api_key' => config('services.tmdb.api_key'),
             'language' => 'en-US',
             'page' => 1,
         ])->json()['results'];
+
+        return MoviesHelper::addPostersUrl($movies);
     }
 
     public function searchMovies(string $query): array
@@ -36,5 +39,10 @@ class MovieService
         ])->json()['results'];
 
         return MoviesHelper::addPostersUrl($movies);
+    }
+
+    public function create(UserList $list, array $data): void
+    {
+        $list->movies()->create($data);
     }
 }

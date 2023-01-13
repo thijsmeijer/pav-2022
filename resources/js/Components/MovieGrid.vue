@@ -5,7 +5,7 @@
             :key="movie.id"
             :movie="movie"
             class="flex items-stretch cursor-pointer"
-            @click.prevent="showMovie(movie.tmdb_id)"
+            @click.prevent="showMovie(movie.id)"
         />
     </div>
 </template>
