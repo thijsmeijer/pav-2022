@@ -83,6 +83,13 @@ return [
                     'visibility' => 'private',
                     'throw' => false,
                 ],
+                'posters' => [
+                    'driver' => 'local',
+                    'root' => storage_path('app/public/media/movies/posters'),
+                    'url' => env('APP_URL').'/storage/media/movies/posters',
+                    'visibility' => 'private',
+                    'throw' => false,
+                ],
             ],
         ],
     ],

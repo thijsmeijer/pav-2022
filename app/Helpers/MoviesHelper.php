@@ -6,7 +6,7 @@ class MoviesHelper
 {
     public static function addPoster($movie): array
     {
-        $movie->poster = $movie->getFirstMediaUrl('posters');
+        $movie->poster = $movie->getFirstMediaUrl('popular_posters');
 
         return $movie->toArray();
     }
