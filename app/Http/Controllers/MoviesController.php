@@ -26,4 +26,11 @@ class MoviesController extends Controller
             'search' => request()->search,
         ]);
     }
+
+    public function show(int $id): InertiaResponse
+    {
+        return Inertia::render('Movies/Show', [
+            'movie' => $this->movie->findMovie($id),
+        ]);
+    }
 }

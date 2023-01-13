@@ -1,13 +1,16 @@
 <template>
-$END$
+    {{ movie }}
+
 </template>
 
 <script>
 export default {
-name: "Show"
+    name: "Show",
+    props: {
+        movie: {
+            type: Object,
+            required: true
+        }
+    }
 }
 </script>
-
-<style scoped>
-
-</style>

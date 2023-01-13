@@ -4,7 +4,8 @@
             v-for="movie in movies"
             :key="movie.id"
             :movie="movie"
-            class="flex items-stretch"
+            class="flex items-stretch cursor-pointer"
+            @click.prevent="showMovie(movie.tmdb_id)"
         />
     </div>
 </template>
@@ -19,6 +20,11 @@ export default {
         movies: {
             type: Array,
             required: true
+        }
+    },
+    methods: {
+        showMovie(id) {
+            this.$inertia.visit(route('movies.show', id))
         }
     }
 }

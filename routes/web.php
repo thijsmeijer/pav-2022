@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/movies', [MoviesController::class, 'index'])->name('movies.index');
+Route::get('movies', [MoviesController::class, 'index'])->name('movies.index');
+
+Route::get('movies/{movie}', [MoviesController::class, 'show'])->name('movies.show');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/list.php';
