@@ -43,6 +43,15 @@ class MovieService
 
     public function create(UserList $list, array $data): void
     {
-        $list->movies()->create($data);
+        $list->movies()->updateOrCreate([
+            'tmdb_id' => $data['tmdb_id'],
+        ], [
+            'title' => $data['title'],
+            'excerpt' => $data['excerpt'],
+            'overview' => $data['overview'],
+            'release_date' => $data['release_date'],
+            'rating' => $data['rating'],
+            'poster_path' => $data['poster_path'],
+        ]);
     }
 }

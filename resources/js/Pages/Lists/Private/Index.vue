@@ -14,13 +14,16 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
-                        <span class="font-bold block w-full">Create a new list</span>
+                            <span class="font-bold block w-full">
+                                Create a new list
+                            </span>
                         </span>
                     </button>
                     <div v-for="list in user.lists"
                          :key="list.id"
                          class="overflow-hidden rounded-md shadow-xl m-2 flex flex-col justify-between cursor-pointer"
-                         @click.prevent="view(list)">
+                         @click.prevent="view(list)"
+                    >
                         <div>
                             <img
                                 :src="list.thumbnail"
@@ -28,7 +31,9 @@
                             />
                             <h2 class="text-lg font-medium leading-none text-slate-500 mb-4 px-4 py-5">
                                 {{ list.name }}
-                                <span class="block text-sm text-slate-400">{{ list.excerpt }}</span>
+                                <span class="block text-sm text-slate-400">
+                                    {{ list.excerpt }}
+                                </span>
                             </h2>
                         </div>
                     </div>

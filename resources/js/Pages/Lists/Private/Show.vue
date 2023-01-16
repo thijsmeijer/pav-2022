@@ -1,28 +1,70 @@
 <template>
     <Head :title="list.name" />
     <AuthenticatedLayout>
-        <div class="py-10">
-            <div class="w-full bg-gray-100 flex">
-                <div class="w-full md:w-1/3">
-                    <div class=" flex flex-col justify-center items-center">
-                        <img :src="list.thumbnail" class="w-1/2 md:w-full xl:w-2/3 h-64 flex items-center justify-center" alt="list thumbnail" />
-                        <h2 class="flex items-center justify-center font-bold text-xl">
-                            {{ list.name }}
-                        </h2>
-                        <p class="px-8">{{ list.description }}</p>
-                        <p class="font-bold text-amber-400">{{ list.status }}</p>
-                        <button
-                            class="flex items-center justify-center w-full md:w-1/3 bg-amber-400 text-white font-bold py-2 px-4 rounded"
-                            @click.prevent="edit"
-                        >
-                            Edit
-                        </button>
-                    </div>
-
+        <div
+            class="w-full flex flex-col justify-center"
+        >
+            <div class="bg-[#2A1D5D] m-4 text-white font-bold p-2 px-4 rounded-md flex justify-between">
+                <div class="flex">
+                    <img
+                        :src="list.thumbnail"
+                        class="h-6 w-auto" alt="list thumbnail"
+                    />
+                    <span class="ml-2">
+                        {{ list.name }}
+                    </span>
                 </div>
-
-                <div class="hidden md:flex w-2/3">
-
+                <span>
+                    {{ list.movies.length }} movies
+                </span>
+                <span
+                    :class="listStatusColors[list.status]"
+                    class="cursor-pointer"
+                >
+                    {{ list.status }}
+                </span>
+                <span
+                    class="cursor-pointer"
+                    @click.prevent="edit"
+                >
+                    edit list
+                </span>
+            </div>
+            <div class="flex">
+                <div class="w-1/2">
+                    <div class="flex flex-col m-4">
+                        <span class="bg-[#2A1D5D] text-white font-bold p-2 px-4 rounded-t-md">
+                            Tagline
+                        </span>
+                        <span class="bg-white text-black font-bold p-2 px-4 rounded-b-md">
+                            {{ list.excerpt }}
+                        </span>
+                    </div>
+                    <div class="flex flex-col m-4">
+                        <span class="bg-[#2A1D5D] text-white font-bold p-2 px-4 rounded-t-md">
+                            Description
+                        </span>
+                        <span class="bg-white text-black font-bold p-2 px-4 rounded-b-md">
+                            {{ list.description }}
+                        </span>
+                    </div>
+                </div>
+                <div class="w-1/2">
+                    <div
+                        v-for="movie in list.movies"
+                        class="bg-white rounded-md shadow-xl m-2 flex justify-between cursor-pointer"
+                    >
+                        <img
+                            :src="movie.poster_path"
+                            class="h-32 sm:h-40 w-auto rounded-l-md" alt="movie poster"
+                        />
+                        <h2 class="text-lg font-medium leading-none text-slate-500 mb-4 px-4 py-5 flex flex-col">
+                            {{ movie.title }}
+                            <span class="text-slate-400">
+                            {{ movie.excerpt }}
+                        </span>
+                        </h2>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,6 +85,14 @@ export default {
         list: {
             type: Object,
             required: true
+        }
+    },
+    data() {
+        return {
+            listStatusColors: {
+                'private': 'text-gray-400',
+                'public': 'text-green-400',
+            }
         }
     },
     methods: {

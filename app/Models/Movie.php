@@ -18,6 +18,7 @@ class Movie extends Model implements hasMedia
         'rating',
         'tmdb_id',
         'poster_path',
+        'excerpt',
     ];
 
     protected $casts = [
