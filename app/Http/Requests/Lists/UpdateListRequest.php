@@ -12,7 +12,7 @@ class UpdateListRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', Rule::unique('user_lists', 'name')->ignore($this->list)],
+            'name' => ['required', 'string', 'max:25', Rule::unique('user_lists', 'name')->where('user_id', auth()->id())->ignore($this->list)],
             'description' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:50'],
             'status' => ['required', 'string', new Enum(ListStatus::class)],

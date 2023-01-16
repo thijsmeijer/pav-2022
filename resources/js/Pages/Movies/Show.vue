@@ -8,6 +8,12 @@
                     v-if="flash.success"
                     :message="flash.success"
                 />
+                <FlashInfoMessage
+                    class="rounded-md bg-blue-50 p-4"
+                    v-if="flash.info"
+                    :message="flash.info"
+                    @view-list="viewList($event)"
+                />
 
                 <div class="flex justify-between items-center">
                     <PreviousPageLink
@@ -85,7 +91,7 @@
                         <div class="flex justify-between">
                             <StarRating :rating="rating" />
                             <span>
-                                {{ movie.release_date }}
+                                released at {{ movie.release_date }}
                             </span>
                         </div>
                     </div>
@@ -106,10 +112,12 @@ import PreviousPageLink from "@/Components/PreviousPageLink.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import StarRating from "@/Components/StarRating.vue";
+import FlashInfoMessage from "@/Components/FlashInfoMessage.vue";
 
 export default {
     name: "Show",
     components: {
+        FlashInfoMessage,
         StarRating,
         PrimaryButton,
         AuthenticatedLayout,
@@ -154,6 +162,9 @@ export default {
                 preserveScroll: true,
                 preserveState: false,
             });
+        },
+        viewList(list) {
+            this.$inertia.visit(route('profile.lists.show', {list: list}));
         }
     }
 }

@@ -46,7 +46,6 @@ export default {
             required: true
         },
         search: {
-            type: String,
             required: true
         }
     },

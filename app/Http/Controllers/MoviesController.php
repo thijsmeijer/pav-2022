@@ -41,6 +41,9 @@ class MoviesController extends Controller
     {
         $this->movie->create($list, $request->validated());
 
-        return redirect()->back()->with('success', "Movie added to '".$list->name . "'");
+        return redirect()
+            ->back()
+            ->with('success', "Movie added to '".$list->name . "'")
+            ->with('info', $list->name);
     }
 }
