@@ -11,7 +11,7 @@
                     <span class="sr-only">goback</span>
                 </dt>
                 <dd>
-                    <span>Terug</span>
+                    <span>Back</span>
                 </dd>
             </dl>
         </a>

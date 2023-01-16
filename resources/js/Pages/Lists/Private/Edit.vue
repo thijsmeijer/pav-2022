@@ -1,6 +1,7 @@
 <template>
     <Head :title="list.name" />
     <AuthenticatedLayout>
+        <ListNav :list="list" page="edit"/>
         <div class="mx-auto max-w-md sm:max-w-lg md:max-w-xl lg:max-w-4xl">
             <div class="mt-4">
                 <div class="mt-5 md:mt-0">
@@ -102,10 +103,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputLabel from "@/Components/FormElements/InputLabel.vue";
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import ListNav from "@/Pages/Lists/Private/Partials/ListNav.vue";
 
 export default {
     name: "Edit",
     components: {
+        ListNav,
         PrimaryButton,
         InputLabel,
         TextInput,
