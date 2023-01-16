@@ -77,8 +77,8 @@
 <script>
 import {Head, useForm} from '@inertiajs/inertia-vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/FormElements/TextInput.vue";
+import InputLabel from "@/Components/FormElements/InputLabel.vue";
 export default {
     name: "Create",
     components: {

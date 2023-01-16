@@ -103,10 +103,10 @@
 
 <script>
 import HamburgerMenu from "@/Layouts/Partials/Guest/HamburgerMenu.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
+import Dropdown from "@/Components/FormElements/Dropdown.vue";
+import DropdownLink from "@/Components/Links/DropdownLink.vue";
 import {Link} from "@inertiajs/inertia-vue3";
-import ApplicationLogoWhite from "@/Components/ApplicationLogoWhite.vue";
+import ApplicationLogoWhite from "@/Components/Logos/ApplicationLogoWhite.vue";
 
 export default {
     name: "GuestNav",

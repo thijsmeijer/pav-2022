@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import MovieCard from "@/Components/MovieCard.vue";
+import MovieCard from "@/Components/Movies/MovieCard.vue";
 
 export default {
     name: "MovieGrid",

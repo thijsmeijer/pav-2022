@@ -30,7 +30,7 @@
 <script>
 import {Head, useForm} from "@inertiajs/inertia-vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import MovieGrid from "@/Components/MovieGrid.vue";
+import MovieGrid from "@/Components/Movies/MovieGrid.vue";
 import {useDebounce} from "@vueuse/core";
 
 export default {

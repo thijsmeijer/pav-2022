@@ -146,11 +146,11 @@
 </template>
 
 <script>
-import ApplicationLogoWhite from "@/Components/ApplicationLogoWhite.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import ApplicationLogoWhite from "@/Components/Logos/ApplicationLogoWhite.vue";
+import Dropdown from "@/Components/FormElements/Dropdown.vue";
+import DropdownLink from "@/Components/Links/DropdownLink.vue";
+import NavLink from "@/Components/Links/NavLink.vue";
+import ResponsiveNavLink from "@/Components/Links/ResponsiveNavLink.vue";
 import {Link} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 

@@ -106,13 +106,13 @@
 import { Head } from "@inertiajs/inertia-vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import FlashSuccessMessage from "@/Components/FlashSuccessMessage.vue";
-import PreviousPageLink from "@/Components/PreviousPageLink.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import FlashSuccessMessage from "@/Components/FlashMessages/FlashSuccessMessage.vue";
+import PreviousPageLink from "@/Components/Links/PreviousPageLink.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-import StarRating from "@/Components/StarRating.vue";
-import FlashInfoMessage from "@/Components/FlashInfoMessage.vue";
+import StarRating from "@/Components/Movies/StarRating.vue";
+import FlashInfoMessage from "@/Components/FlashMessages/FlashInfoMessage.vue";
 
 export default {
     name: "Show",

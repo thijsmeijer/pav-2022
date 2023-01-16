@@ -53,12 +53,12 @@
 
 <script>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import InputError from '@/Components/FormElements/InputError.vue';
+import InputLabel from '@/Components/FormElements/InputLabel.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
+import TextInput from '@/Components/FormElements/TextInput.vue';
+import Checkbox from '@/Components/FormElements/Checkbox.vue';
+import ApplicationLogo from "@/Components/Logos/ApplicationLogo.vue";
 
 export default {
     name: "Login",

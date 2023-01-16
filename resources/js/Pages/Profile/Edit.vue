@@ -157,12 +157,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import {Head, useForm} from '@inertiajs/inertia-vue3';
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
+import InputLabel from "@/Components/FormElements/InputLabel.vue";
+import TextInput from "@/Components/FormElements/TextInput.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {usePrecognitiveForm} from "laravel-precognition-vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import InputError from "@/Components/FormElements/InputError.vue";
 
 export default {
     components: {

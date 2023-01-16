@@ -89,11 +89,11 @@
 <script>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import { usePrecognitiveForm} from "laravel-precognition-vue";
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import InputError from '@/Components/FormElements/InputError.vue';
+import InputLabel from '@/Components/FormElements/InputLabel.vue';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
+import TextInput from '@/Components/FormElements/TextInput.vue';
+import ApplicationLogo from "@/Components/Logos/ApplicationLogo.vue";
 
 export default {
     name: "Register",

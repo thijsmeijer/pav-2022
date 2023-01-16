@@ -99,9 +99,9 @@
 <script>
 import {Head, useForm} from '@inertiajs/inertia-vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputLabel from "@/Components/FormElements/InputLabel.vue";
+import TextInput from "@/Components/FormElements/TextInput.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 
 export default {
     name: "Edit",
