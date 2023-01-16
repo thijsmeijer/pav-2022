@@ -21,6 +21,7 @@ Route::get('movies', [MoviesController::class, 'index'])->name('movies.index');
 
 Route::get('movies/{movie}', [MoviesController::class, 'show'])->name('movies.show');
 Route::post('{list}/movie/store', [MoviesController::class, 'store'])->name('lists.movie.store');
+Route::delete('{list}/movie/{movie}', [MoviesController::class, 'destroy'])->name('lists.movie.destroy');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/list.php';

@@ -1,8 +1,10 @@
 <template>
-    <div class="w-1/2">
+    <div>
+        <FlashSuccessMessage :message="flash.success"/>
+
         <div
             v-for="movie in list.movies"
-            class="bg-white rounded-md shadow-xl m-2 flex justify-between cursor-pointer"
+            class="bg-white rounded-md shadow-xl m-2 flex justify-between items-center cursor-pointer"
         >
             <img
                 :src="movie.poster_path"
@@ -14,17 +16,39 @@
                     {{ movie.excerpt }}
                 </span>
             </h2>
+            <TrashIcon
+                class="h-5 w-5 text-red-500 cursor-pointer mr-4"
+                @click.prevent="removeMovie(movie)"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import {TrashIcon} from "@heroicons/vue/20/solid";
+import {Inertia} from "@inertiajs/inertia";
+import FlashSuccessMessage from "@/Components/FlashMessages/FlashSuccessMessage.vue";
 export default {
     name: "ListMovies",
+    components: {
+        FlashSuccessMessage,
+        TrashIcon
+    },
     props: {
         list: {
             type: Object,
             required: true
+        },
+        flash: {
+            type: Object,
+        }
+    },
+    methods: {
+        removeMovie(movie) {
+            Inertia.delete(route('lists.movie.destroy', {
+                list: this.list.slug,
+                movie: movie.id
+            }))
         }
     }
 }

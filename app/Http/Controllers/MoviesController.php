@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Movies\StoreMovieRequest;
+use App\Models\Movie;
 use App\Models\UserList;
 use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
@@ -43,5 +44,14 @@ class MoviesController extends Controller
             ->back()
             ->with('success', "Movie added to '".$list->name."'")
             ->with('info', $list->name);
+    }
+
+    public function destroy(UserList $list, Movie $movie): RedirectResponse
+    {
+        $list->movies()->detach($movie);
+
+        return redirect()
+            ->back()
+            ->with('success', 'Movie successfully removed from list');
     }
 }

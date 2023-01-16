@@ -1,5 +1,5 @@
 <template>
-    <div class="flex" v-show="message">
+    <div class="flex bg-green-50 p-2 rounded-md" v-show="message">
         <div class="flex-shrink-0">
             <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 20 20"

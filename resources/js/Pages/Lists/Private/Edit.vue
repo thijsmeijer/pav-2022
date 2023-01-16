@@ -104,10 +104,12 @@ import InputLabel from "@/Components/FormElements/InputLabel.vue";
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import ListNav from "@/Pages/Lists/Private/Partials/ListNav.vue";
+import ListMovies from "@/Pages/Lists/Private/Partials/ListMovies.vue";
 
 export default {
     name: "Edit",
     components: {
+        ListMovies,
         ListNav,
         PrimaryButton,
         InputLabel,

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/2">
+    <div>
         <div class="flex flex-col m-4">
             <span class="bg-[#2A1D5D] text-white font-bold p-2 px-4 rounded-t-md">
                 Tagline

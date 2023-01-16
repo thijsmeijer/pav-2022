@@ -9,6 +9,7 @@ class MovieResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' => $this->id,
             'tmdb_id' => $this->tmdb_id,
             'title' => $this->title,
             'excerpt' => $this->excerpt,
