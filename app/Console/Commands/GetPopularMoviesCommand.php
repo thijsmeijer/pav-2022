@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Jobs\SyncPopularMoviesJob;
 use App\Services\MovieService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 
 class GetPopularMoviesCommand extends Command
 {

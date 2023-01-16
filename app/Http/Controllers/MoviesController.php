@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\MoviesHelper;
 use App\Http\Requests\Movies\StoreMovieRequest;
-use App\Models\PopularMovie;
 use App\Models\UserList;
 use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
@@ -43,7 +41,7 @@ class MoviesController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', "Movie added to '".$list->name . "'")
+            ->with('success', "Movie added to '".$list->name."'")
             ->with('info', $list->name);
     }
 }

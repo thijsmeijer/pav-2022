@@ -8,8 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class SyncPopularMoviesJob implements ShouldQueue
 {
@@ -30,7 +28,7 @@ class SyncPopularMoviesJob implements ShouldQueue
     private function syncMovies(): void
     {
         foreach ($this->movies as $movie) {
-             $newMovie = PopularMovie::create([
+            $newMovie = PopularMovie::create([
                 'title' => $movie['title'],
                 'tmdb_id' => $movie['id'],
                 'poster_path' => $movie['poster_path'],
