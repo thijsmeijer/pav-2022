@@ -143,7 +143,7 @@ export default {
             tmdb_id: props.movie.id,
             title: props.movie.title,
             poster_path: props.movie.poster,
-            tagline: props.movie.tagline,
+            excerpt: props.movie.tagline,
             overview: props.movie.overview,
             rating: props.movie.vote_average,
             release_date: props.movie.release_date,
